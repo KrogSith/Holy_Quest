@@ -54,11 +54,11 @@ func death():
 	$Weapon.queue_free()
 	$CollisionShape2D.queue_free()
 	$AnimatedSprite2D.queue_free()
-	$Sprite2D.visible = true
-	if mouse.x < res.x/2:
+	if $AnimatedSprite2D.flip_h == true:
 		$Sprite2D.flip_h = true
-	elif mouse.x > res.x/2:
-		$Sprite2D.flip_h = false
+	else:
+		pass
+	$Sprite2D.visible = true
 	
 
 
