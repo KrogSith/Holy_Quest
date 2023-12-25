@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://bf7jkljxrdi7f"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/Enemies/Enemy_Bat.gd" id="1_1efq4"]
+[ext_resource type="Texture2D" uid="uid://d3dhr4kf6oo27" path="res://Textures/Characters/Enemies/Demon_Eye/fly_anim_spritesheet.png" id="2_dyfhh"]
+[ext_resource type="AudioStream" uid="uid://8e5pyek0bkvw" path="res://Audio/Sound/Enemies/Eye/rokovaya-pulya-ubila-cheloveka.mp3" id="3_5v5hp"]
+[ext_resource type="Texture2D" uid="uid://t7wolhwhmka7" path="res://Textures/Characters/Enemies/Demon_Eye/DeadBody.png" id="4_1aa8g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpsdm"]
+atlas = ExtResource("2_dyfhh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qysj2"]
+atlas = ExtResource("2_dyfhh")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twvbk"]
+atlas = ExtResource("2_dyfhh")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjooe"]
+atlas = ExtResource("2_dyfhh")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ny78"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpsdm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qysj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twvbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjooe")
+}],
+"loop": true,
+"name": &"Fly",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_in5kc"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f7w0c"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o6vgx"]
+radius = 58.0
+
+[node name="Enemy_Bat" type="CharacterBody2D" groups=["Enemies"]]
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_1efq4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8ny78")
+animation = &"Fly"
+autoplay = "Fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_in5kc")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_f7w0c")
+debug_color = Color(0.996078, 0, 0.176471, 0.419608)
+
+[node name="Sight" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight"]
+shape = SubResource("CircleShape2D_o6vgx")
+debug_color = Color(0.603922, 0.541176, 0, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="End_Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 4
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_5v5hp")
+volume_db = 10.0
+
+[node name="DeadBody" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_1aa8g")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

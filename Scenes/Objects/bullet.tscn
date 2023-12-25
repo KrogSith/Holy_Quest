@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ksxv47by0gk7"]
+
+[ext_resource type="Texture2D" uid="uid://bny6aec7ldh1f" path="res://Textures/Weapones/Bullet.png" id="1_g8kor"]
+[ext_resource type="Script" path="res://Scripts/Objects/bullet.gd" id="1_hyn6n"]
+[ext_resource type="AudioStream" uid="uid://d32v2tuahnw0w" path="res://Audio/Sound/Weapon/rikoshet-puli-556.mp3" id="3_y5rjx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fbhib"]
+radius = 2.23607
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_hyn6n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_g8kor")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fbhib")
+
+[node name="InWall" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_y5rjx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

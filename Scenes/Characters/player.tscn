@@ -1,0 +1,157 @@
+[gd_scene load_steps=24 format=3 uid="uid://dotjiw8l07uqs"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/Player.gd" id="1_8qply"]
+[ext_resource type="Texture2D" uid="uid://bbbk0bpwv7vdx" path="res://Textures/Characters/Player/PriestIdleAnimation-Sheet.png" id="2_ojrky"]
+[ext_resource type="PackedScene" uid="uid://ksxv47by0gk7" path="res://Scenes/Objects/bullet.tscn" id="2_vyn2l"]
+[ext_resource type="Texture2D" uid="uid://bpsdw5l81vnss" path="res://Textures/Characters/Player/PriestRunAnimation.png" id="3_nnl0r"]
+[ext_resource type="Texture2D" uid="uid://nc7ltsbxv580" path="res://Textures/Weapones/DBShotgun.png" id="4_selwg"]
+[ext_resource type="AudioStream" uid="uid://dklsqfvyblnwt" path="res://Audio/Sound/Weapon/gun-shotgun-blast-shot_mkkqx5ed.mp3" id="6_7jqji"]
+[ext_resource type="AudioStream" uid="uid://cbvsu0hw7717b" path="res://Audio/Sound/Weapon/shotgun-shell-drop_f1mq3ieu.mp3" id="7_qpmf5"]
+[ext_resource type="AudioStream" uid="uid://b0e0o5e52dsj0" path="res://Audio/Sound/Player/72ea3dd5d54f91f.mp3" id="8_uo374"]
+[ext_resource type="Texture2D" uid="uid://g4xiaa272ubm" path="res://Textures/Characters/Player/Player_Dead.png" id="9_s0w08"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0205v"]
+atlas = ExtResource("2_ojrky")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3upfe"]
+atlas = ExtResource("2_ojrky")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3rjr"]
+atlas = ExtResource("2_ojrky")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5d7h"]
+atlas = ExtResource("2_ojrky")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlsrq"]
+atlas = ExtResource("2_ojrky")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5aqs"]
+atlas = ExtResource("2_ojrky")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1im07"]
+atlas = ExtResource("3_nnl0r")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pclm0"]
+atlas = ExtResource("3_nnl0r")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x342p"]
+atlas = ExtResource("3_nnl0r")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1ajd"]
+atlas = ExtResource("3_nnl0r")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3o3pi"]
+atlas = ExtResource("3_nnl0r")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wskps"]
+atlas = ExtResource("3_nnl0r")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3ec5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0205v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3upfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3rjr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5d7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlsrq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5aqs")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1im07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pclm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x342p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1ajd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3o3pi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wskps")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r8lxt"]
+radius = 4.0
+height = 12.0
+
+[node name="Player" type="CharacterBody2D"]
+slide_on_ceiling = false
+script = ExtResource("1_8qply")
+Bullet = ExtResource("2_vyn2l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x3ec5")
+animation = &"Idle"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("CapsuleShape2D_r8lxt")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+metadata/_edit_lock_ = true
+
+[node name="Weapon" type="Node2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
+texture = ExtResource("4_selwg")
+
+[node name="Marker2D" type="Marker2D" parent="Weapon"]
+position = Vector2(4, 0)
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="Weapon"]
+stream = ExtResource("6_7jqji")
+
+[node name="Gilza" type="AudioStreamPlayer2D" parent="Weapon"]
+stream = ExtResource("7_qpmf5")
+
+[node name="Timer" type="Timer" parent="Weapon"]
+one_shot = true
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_uo374")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, 4)
+texture = ExtResource("9_s0w08")
