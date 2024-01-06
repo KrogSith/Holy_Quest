@@ -69,18 +69,6 @@ metadata/_edit_lock_ = true
 shape = SubResource("CircleShape2D_f7w0c")
 debug_color = Color(0.996078, 0, 0.176471, 0.419608)
 
-[node name="End_Timer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(0, 0)
-collision_mask = 4
-
-[node name="Line2D" type="Line2D" parent="RayCast2D"]
-width = 100.0
-default_color = Color(1, 0, 0, 1)
-
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_5v5hp")
 volume_db = 10.0
@@ -89,4 +77,13 @@ volume_db = 10.0
 visible = false
 texture = ExtResource("4_1aa8g")
 
+[node name="Wander_time" type="Timer" parent="."]
+wait_time = 0.001
+autostart = true
+
+[node name="See_timer" type="Timer" parent="."]
+wait_time = 4.0
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Wander_time" to="." method="_on_wander_time_timeout"]
+[connection signal="timeout" from="See_timer" to="." method="_on_see_timer_timeout"]
