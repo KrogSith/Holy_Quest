@@ -4,10 +4,12 @@ extends CharacterBody2D
 const SPEED = 30.0
 
 @export var player: CharacterBody2D
+
 enum State {
 	Wander,
 	Attack
 }
+
 var current_state = State.Wander
 var rng = RandomNumberGenerator.new()
 var dead = false
@@ -27,12 +29,15 @@ func _physics_process(delta):
 		match current_state:
 			State.Wander:
 				$See_timer.stop()
+				if isColliding() == true:
+					_on_wander_time_timeout()
 				#$Wander_time.autostart = true
-				print($Wander_time.time_left)
+				#print($Wander_time.time_left)
 			State.Attack:
+				var dir_to_player = global_position.direction_to(player.global_position)
 				$Wander_time.stop()
-				var dir = Vector2(0, 0)
-				velocity = dir*SPEED
+				#var dir = Vector2(0, 0)
+				velocity = dir_to_player*SPEED
 		anim()
 		move_and_slide()
 
@@ -58,11 +63,28 @@ func state_switch():
 		query.exclude = [self]
 		var result = space_state.intersect_ray(query)
 		#print(result)
-		if result ['collider'] == player:
+		if result['collider'] == player:
 			$See_timer.start()
 			current_state = State.Attack
 		else:
 			pass
+
+
+#func obstacles():
+	#var px = player.global_position.x
+	#var py = player.global_position.y
+	#var sx = global_position.x
+	#var sy = global_position.x
+	#if is_on_wall():
+		#if py >
+
+
+func isColliding():
+	var isColliding = false
+	if is_on_ceiling() == true or is_on_floor() == true or is_on_wall() == true:
+		isColliding = true
+	else: pass
+	return isColliding
 
 
 func death():
