@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 30.0
-const POV = 100.0
+const SPEED = 50.0
+const POV = 60.0
 
 @export var player: CharacterBody2D
 
@@ -14,7 +14,7 @@ enum State {
 var current_state = State.Wander
 var rng = RandomNumberGenerator.new()
 var dead = false
-var hp = 2
+var hp = 1
 
 
 func _ready():
@@ -24,6 +24,7 @@ func _ready():
 
 func _physics_process(delta):
 	if !dead:
+		#print($See_timer.time_left)
 		if hp <= 0:
 			death()
 		state_switch()
@@ -47,16 +48,14 @@ func _physics_process(delta):
 
 
 func anim():
+	if velocity.x == 0 and velocity.y == 0:
+		$AnimatedSprite2D.play('Idle')
+	else:
+		$AnimatedSprite2D.play('Run')
 	if velocity.x < 0:
 		$AnimatedSprite2D.flip_h = true
 	elif velocity.x > 0:
 		$AnimatedSprite2D.flip_h = false
-
-
-func _on_area_2d_body_entered(body):
-	if body.name == 'Player':
-		body.death()
-
 
 func state_switch():
 	var player_distance = player.position - position
@@ -66,8 +65,8 @@ func state_switch():
 		var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
 		query.exclude = [self]
 		var result = space_state.intersect_ray(query)
-		#print(result)
 		if player.dead == false:
+			#print(result['collider'])
 			if result['collider'] == player:
 				$See_timer.start()
 				current_state = State.Attack
@@ -105,12 +104,20 @@ func death():
 	$DeadBody.visible = true
 
 
-func _on_wander_time_timeout():
-	velocity.x = rng.randf_range(-20.0, 20.0)
-	velocity.y = rng.randf_range(-20.0, 20.0)
-	$Wander_time.wait_time = rng.randf_range(2, 5)
+func _on_area_2d_body_entered(body):
+	if body.name == 'Player':
+		body.death()
 
 
 func _on_see_timer_timeout():
 	$Wander_time.start(0.1)
 	current_state = State.Wander
+	$See_timer.stop()
+
+
+func _on_wander_time_timeout():
+	velocity.x = rng.randf_range(-40.0, 40.0)
+	velocity.y = rng.randf_range(-40.0, 40.0)
+	$Wander_time.wait_time = rng.randf_range(2, 5)
+
+

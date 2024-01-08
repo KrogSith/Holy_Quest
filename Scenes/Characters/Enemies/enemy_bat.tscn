@@ -82,7 +82,7 @@ wait_time = 0.001
 autostart = true
 
 [node name="See_timer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 8.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true

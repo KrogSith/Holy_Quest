@@ -52,7 +52,7 @@ func death():
 	dead = true
 	$DeathSound.play()
 	$Weapon.queue_free()
-	#$CollisionShape2D.queue_free()
+	$CollisionShape2D.queue_free()
 	$AnimatedSprite2D.queue_free()
 	if $AnimatedSprite2D.flip_h == true:
 		$Sprite2D.flip_h = true
