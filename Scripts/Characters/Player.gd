@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
+
 @export var Bullet : PackedScene
+@onready var healthbar : TextureProgressBar = get_parent().get_node("UI/HealthBar")
 const SPEED = 150.0
 var radius = 5
 var dead = false
+
 
 func _physics_process(delta):
 	if !dead:
@@ -43,6 +46,15 @@ func anim():
 		$AnimatedSprite2D.play('Idle')
 	else:
 		$AnimatedSprite2D.play('Run')
+
+
+func get_damage():
+	healthbar.value -= 15
+	print(healthbar.value)
+	if healthbar.value <= 0:
+		death()
+	else: pass
+	
 
 
 func death():

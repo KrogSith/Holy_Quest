@@ -4,7 +4,8 @@ extends CharacterBody2D
 const SPEED = 30.0
 const POV = 100.0
 
-@export var player: CharacterBody2D
+@onready var player: CharacterBody2D = get_parent().get_node("Player")
+#@export var player: CharacterBody2D
 
 enum State {
 	Wander,
@@ -55,7 +56,7 @@ func anim():
 
 func _on_area_2d_body_entered(body):
 	if body.name == 'Player':
-		body.death()
+		body.get_damage()
 
 
 func state_switch():
