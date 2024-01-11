@@ -6,6 +6,7 @@ extends CharacterBody2D
 const SPEED = 150.0
 var radius = 5
 var dead = false
+var rng = RandomNumberGenerator.new()
 
 
 func _physics_process(delta):
@@ -50,11 +51,10 @@ func anim():
 
 func get_damage():
 	healthbar.value -= 15
-	print(healthbar.value)
+	#print(healthbar.value)
 	if healthbar.value <= 0:
 		death()
-	else: pass
-	
+	else: $HurtSound0.play()
 
 
 func death():

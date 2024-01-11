@@ -64,10 +64,12 @@ shape = SubResource("CircleShape2D_in5kc")
 metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_f7w0c")
 debug_color = Color(0.996078, 0, 0.176471, 0.419608)
+metadata/_edit_lock_ = true
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_5v5hp")
@@ -87,6 +89,11 @@ wait_time = 8.0
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
+[node name="MakePathTimer" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Wander_time" to="." method="_on_wander_time_timeout"]
 [connection signal="timeout" from="See_timer" to="." method="_on_see_timer_timeout"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="MakePathTimer" to="." method="_on_make_path_timer_timeout"]

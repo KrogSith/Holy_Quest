@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dotjiw8l07uqs"]
+[gd_scene load_steps=25 format=3 uid="uid://dotjiw8l07uqs"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player.gd" id="1_8qply"]
 [ext_resource type="Texture2D" uid="uid://bbbk0bpwv7vdx" path="res://Textures/Characters/Player/PriestIdleAnimation-Sheet.png" id="2_ojrky"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cbvsu0hw7717b" path="res://Audio/Sound/Weapon/shotgun-shell-drop_f1mq3ieu.mp3" id="7_qpmf5"]
 [ext_resource type="AudioStream" uid="uid://b0e0o5e52dsj0" path="res://Audio/Sound/Player/72ea3dd5d54f91f.mp3" id="8_uo374"]
 [ext_resource type="Texture2D" uid="uid://g4xiaa272ubm" path="res://Textures/Characters/Player/Player_Dead.png" id="9_s0w08"]
+[ext_resource type="AudioStream" uid="uid://wluislmllahj" path="res://Audio/Sound/Player/zvuk-boli-87.mp3" id="10_ruu4o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0205v"]
 atlas = ExtResource("2_ojrky")
@@ -155,3 +156,7 @@ stream = ExtResource("8_uo374")
 visible = false
 position = Vector2(-1, 4)
 texture = ExtResource("9_s0w08")
+
+[node name="HurtSound0" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_ruu4o")
+volume_db = 10.0

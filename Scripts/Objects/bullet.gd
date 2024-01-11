@@ -10,7 +10,7 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("Enemies"):
-		body.hp-=1
+		body.get_damage()
 		queue_free()
 	else:
 		$InWall.play()

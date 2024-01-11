@@ -6,6 +6,7 @@ const POV = 100.0
 
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
 #@export var player: CharacterBody2D
+@onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 
 enum State {
 	Wander,
@@ -25,8 +26,6 @@ func _ready():
 
 func _physics_process(delta):
 	if !dead:
-		if hp <= 0:
-			death()
 		state_switch()
 		#print(current_state)
 		match current_state:
@@ -39,8 +38,18 @@ func _physics_process(delta):
 			State.Attack:
 				$Wander_time.stop()
 				if player.dead == false:
-					var dir_to_player = global_position.direction_to(player.global_position)
-					velocity = dir_to_player*SPEED
+					var space_state = get_world_2d().direct_space_state
+					var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
+					query.exclude = [self]
+					var result = space_state.intersect_ray(query)
+					if result['collider'] == player:
+						$MakePathTimer.stop()
+						var dir_to_player = global_position.direction_to(player.global_position)
+						velocity = dir_to_player*SPEED
+					else:
+						var dir_to_player = to_local(nav_agent.get_next_path_position()).normalized()
+						velocity = dir_to_player*SPEED
+						_on_make_path_timer_timeout()
 				else:
 					_on_see_timer_timeout()
 		anim()
@@ -76,13 +85,8 @@ func state_switch():
 				pass
 
 
-#func obstacles():
-	#var px = player.global_position.x
-	#var py = player.global_position.y
-	#var sx = global_position.x
-	#var sy = global_position.x
-	#if is_on_wall():
-		#if py >
+func makepath():
+	nav_agent.target_position = player.global_position
 
 
 func isColliding():
@@ -93,12 +97,24 @@ func isColliding():
 	return isColliding
 
 
+func get_damage():
+	hp -= 1
+	if hp <= 0:
+		death()
+	else:
+		current_state = State.Attack
+
+
 func death():
 	$DeathSound.play()
 	dead = true
 	$AnimatedSprite2D.queue_free()
 	$CollisionShape2D.queue_free()
 	$Area2D.queue_free()
+	$NavigationAgent2D.queue_free()
+	$Wander_time.queue_free()
+	$See_timer.queue_free()
+	$MakePathTimer.queue_free()
 	if $AnimatedSprite2D.flip_h == true:
 		$DeadBody.flip_h = true
 	else:
@@ -115,3 +131,8 @@ func _on_wander_time_timeout():
 func _on_see_timer_timeout():
 	$Wander_time.start(0.1)
 	current_state = State.Wander
+
+
+func _on_make_path_timer_timeout():
+	makepath()
+	$MakePathTimer.start(0.5)
