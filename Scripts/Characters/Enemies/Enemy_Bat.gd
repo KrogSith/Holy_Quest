@@ -4,6 +4,8 @@ extends CharacterBody2D
 const SPEED = 30.0
 const POV = 100.0
 
+signal died()
+
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
 #@export var player: CharacterBody2D
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
@@ -17,6 +19,7 @@ var current_state = State.Wander
 var rng = RandomNumberGenerator.new()
 var dead = false
 var hp = 2
+var knockback = Vector2.ZERO
 
 
 func _ready():
@@ -45,10 +48,10 @@ func _physics_process(delta):
 					if result['collider'] == player:
 						$MakePathTimer.stop()
 						var dir_to_player = global_position.direction_to(player.global_position)
-						velocity = dir_to_player*SPEED
+						velocity = dir_to_player*SPEED+knockback*15
 					else:
 						var dir_to_player = to_local(nav_agent.get_next_path_position()).normalized()
-						velocity = dir_to_player*SPEED
+						velocity = dir_to_player*SPEED+knockback*15
 						_on_make_path_timer_timeout()
 				else:
 					_on_see_timer_timeout()
@@ -66,6 +69,7 @@ func anim():
 func _on_area_2d_body_entered(body):
 	if body.name == 'Player':
 		body.get_damage()
+		body.knockback = body.transform.origin - transform.origin
 
 
 func state_switch():
@@ -103,9 +107,19 @@ func get_damage():
 		death()
 	else:
 		current_state = State.Attack
+	self.visible = false
+	await get_tree().create_timer(0.1).timeout
+	self.visible = true
+	await get_tree().create_timer(0.1).timeout
+	self.visible = false
+	await get_tree().create_timer(0.1).timeout
+	self.visible = true
+	knockback = Vector2.ZERO
+	
 
 
 func death():
+	died.emit()
 	$DeathSound.play()
 	dead = true
 	$AnimatedSprite2D.queue_free()

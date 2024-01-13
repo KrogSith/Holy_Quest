@@ -116,6 +116,9 @@ motion_mode = 1
 script = ExtResource("1_47pu8")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 6.0
+max_speed = 50.0
 debug_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -150,7 +153,6 @@ wait_time = 6.0
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_11yei")
-volume_db = 10.0
 
 [node name="MakePathTimer" type="Timer" parent="."]
 
