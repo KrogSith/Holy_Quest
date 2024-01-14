@@ -4,6 +4,13 @@ extends StaticBody2D
 func _ready():
 	$CollisionShape2D.disabled = true
 
+func start_door():
+	$CollisionShape2D.set_deferred("disabled", false)
+	$Sprite2D.visible = false
+	$AnimatedSprite2D.visible = true
+	$AnimatedSprite2D.animation = 'Close'
+	$AnimatedSprite2D.frame = 13
+
 
 func open():
 	$AudioStreamPlayer2D.play()

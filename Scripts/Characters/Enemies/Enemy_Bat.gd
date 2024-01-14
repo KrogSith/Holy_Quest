@@ -6,7 +6,7 @@ const POV = 100.0
 
 signal died()
 
-@onready var player: CharacterBody2D = get_parent().get_node("Player")
+@onready var player: CharacterBody2D = get_tree().current_scene.get_node('Player')#get_parent().get_node("Player")
 #@export var player: CharacterBody2D
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 
@@ -68,8 +68,9 @@ func anim():
 
 func _on_area_2d_body_entered(body):
 	if body.name == 'Player':
-		body.get_damage()
-		body.knockback = body.transform.origin - transform.origin
+		if body.damaged == false:
+			body.get_damage()
+			body.knockback = body.transform.origin - transform.origin
 
 
 func state_switch():

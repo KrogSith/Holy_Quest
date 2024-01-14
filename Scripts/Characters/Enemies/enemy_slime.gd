@@ -4,7 +4,7 @@ extends CharacterBody2D
 const SPEED = 50.0
 const POV = 60.0
 
-@onready var player: CharacterBody2D = get_parent().get_node("Player")
+@onready var player: CharacterBody2D = get_tree().current_scene.get_node('Player')#get_parent().get_node("Player")
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 
 signal died
@@ -128,8 +128,9 @@ func death():
 
 func _on_area_2d_body_entered(body):
 	if body.name == 'Player':
-		body.get_damage()
-		body.knockback = body.transform.origin - transform.origin
+		if body.damaged == false:
+			body.get_damage()
+			body.knockback = body.transform.origin - transform.origin
 
 
 func _on_see_timer_timeout():

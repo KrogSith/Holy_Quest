@@ -58,6 +58,7 @@ func get_damage():
 		death()
 	else: 
 		$HurtSound0.play()
+		damaged = true
 		self.visible = false
 		await get_tree().create_timer(0.1).timeout
 		self.visible = true
@@ -66,7 +67,7 @@ func get_damage():
 		await get_tree().create_timer(0.1).timeout
 		self.visible = true
 		knockback = Vector2.ZERO
-	#damaged = false
+		damaged = false
 
 
 func death():

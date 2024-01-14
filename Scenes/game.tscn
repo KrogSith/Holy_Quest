@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://blk41kd1g5eyc"]
+[gd_scene load_steps=7 format=3 uid="uid://blk41kd1g5eyc"]
 
+[ext_resource type="Script" path="res://Scripts/MainGame/game.gd" id="1_7bjhl"]
 [ext_resource type="Texture2D" uid="uid://b4542bj5vfaru" path="res://Textures/UI/health_ui_under.png" id="1_8trck"]
 [ext_resource type="Texture2D" uid="uid://3flifkewj7db" path="res://Textures/UI/health_ui.png" id="2_gmsbx"]
 [ext_resource type="Texture2D" uid="uid://dhn8u6n87vcmo" path="res://Textures/UI/health_ui_progress.png" id="3_0d4eu"]
-[ext_resource type="PackedScene" uid="uid://i3txtjlsydpt" path="res://Scenes/Levels/Intermediate/room_0.tscn" id="4_mi03f"]
+[ext_resource type="Script" path="res://Scripts/MainGame/Rooms.gd" id="4_0mpws"]
+[ext_resource type="PackedScene" uid="uid://dotjiw8l07uqs" path="res://Scenes/Characters/player.tscn" id="5_gfpqj"]
 
 [node name="Game" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_7bjhl")
 
 [node name="UI" type="CanvasLayer" parent="."]
-visible = false
 scale = Vector2(5, 5)
 transform = Transform2D(5, 0, 0, 5, 0, 0)
 
@@ -24,5 +27,10 @@ texture_under = ExtResource("1_8trck")
 texture_over = ExtResource("2_gmsbx")
 texture_progress = ExtResource("3_0d4eu")
 texture_progress_offset = Vector2(19, 0)
+metadata/_edit_lock_ = true
 
-[node name="Room0" parent="." instance=ExtResource("4_mi03f")]
+[node name="Rooms" type="Node2D" parent="."]
+script = ExtResource("4_0mpws")
+
+[node name="Player" parent="." instance=ExtResource("5_gfpqj")]
+position = Vector2(21, 142)

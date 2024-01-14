@@ -113,6 +113,7 @@ radius = 4.0
 height = 12.0
 
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
 slide_on_ceiling = false
 script = ExtResource("1_8qply")
 Bullet = ExtResource("2_vyn2l")
@@ -123,12 +124,10 @@ animation = &"Idle"
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_r8lxt")
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
 metadata/_edit_lock_ = true
 
 [node name="Weapon" type="Node2D" parent="."]

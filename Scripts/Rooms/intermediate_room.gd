@@ -33,11 +33,11 @@ func spawn_enemies():
 	for enemy_pos in $EnemyPossitions.get_children():
 		var enemy = random_enemy()
 		var __ = enemy.died.connect(self.on_enemy_killed)
-		enemy.global_position = enemy_pos.global_position
+		enemy.position = enemy_pos.position
 		call_deferred("add_child", enemy)
 		
 		var explosion : AnimatedSprite2D = SPAWN_EXPLOSION_SCENE.instantiate()
-		explosion.global_position = enemy_pos.global_position
+		explosion.position = enemy_pos.position
 		call_deferred("add_child", explosion)
 
 
