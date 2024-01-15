@@ -30,6 +30,7 @@ texture_progress_offset = Vector2(19, 0)
 metadata/_edit_lock_ = true
 
 [node name="Rooms" type="Node2D" parent="."]
+y_sort_enabled = true
 script = ExtResource("4_0mpws")
 
 [node name="Player" parent="." instance=ExtResource("5_gfpqj")]

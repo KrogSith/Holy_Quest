@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var num_enemies = $EnemyPossitions.get_child_count()
+@onready var num_enemies = $EnemyPositions.get_child_count()
 
 var rng = RandomNumberGenerator.new()
 
@@ -30,7 +30,7 @@ func random_enemy():
 		
 		
 func spawn_enemies():
-	for enemy_pos in $EnemyPossitions.get_children():
+	for enemy_pos in $EnemyPositions.get_children():
 		var enemy = random_enemy()
 		var __ = enemy.died.connect(self.on_enemy_killed)
 		enemy.position = enemy_pos.position

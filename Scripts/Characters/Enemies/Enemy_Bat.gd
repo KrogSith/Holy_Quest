@@ -19,7 +19,6 @@ var current_state = State.Wander
 var rng = RandomNumberGenerator.new()
 var dead = false
 var hp = 2
-var knockback = Vector2.ZERO
 
 
 func _ready():
@@ -48,10 +47,10 @@ func _physics_process(delta):
 					if result['collider'] == player:
 						$MakePathTimer.stop()
 						var dir_to_player = global_position.direction_to(player.global_position)
-						velocity = dir_to_player*SPEED+knockback*15
+						velocity = dir_to_player*SPEED
 					else:
 						var dir_to_player = to_local(nav_agent.get_next_path_position()).normalized()
-						velocity = dir_to_player*SPEED+knockback*15
+						velocity = dir_to_player*SPEED
 						_on_make_path_timer_timeout()
 				else:
 					_on_see_timer_timeout()
@@ -70,11 +69,10 @@ func _on_area_2d_body_entered(body):
 	if body.name == 'Player':
 		if body.damaged == false:
 			body.get_damage()
-			body.knockback = body.transform.origin - transform.origin
 
 
 func state_switch():
-	var player_distance = player.position - position
+	var player_distance = player.global_position - global_position
 	if player_distance.length() <= POV:
 		#print($RayCast2D.target_position)
 		var space_state = get_world_2d().direct_space_state
@@ -115,8 +113,6 @@ func get_damage():
 	self.visible = false
 	await get_tree().create_timer(0.1).timeout
 	self.visible = true
-	knockback = Vector2.ZERO
-	
 
 
 func death():

@@ -7,7 +7,6 @@ const SPEED = 150.0
 var radius = 5
 var dead = false
 var rng = RandomNumberGenerator.new()
-var knockback = Vector2.ZERO
 var damaged = false
 
 
@@ -27,7 +26,7 @@ func _physics_process(delta):
 
 func movement():
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = direction * SPEED + knockback*10
+	velocity = direction * SPEED
 
 
 func actions():
@@ -66,7 +65,6 @@ func get_damage():
 		self.visible = false
 		await get_tree().create_timer(0.1).timeout
 		self.visible = true
-		knockback = Vector2.ZERO
 		damaged = false
 
 

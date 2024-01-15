@@ -128,6 +128,7 @@ shape = SubResource("CapsuleShape2D_r8lxt")
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
 metadata/_edit_lock_ = true
 
 [node name="Weapon" type="Node2D" parent="."]
