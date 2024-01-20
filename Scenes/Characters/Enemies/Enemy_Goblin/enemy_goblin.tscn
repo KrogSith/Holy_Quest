@@ -116,8 +116,8 @@ script = ExtResource("1_uy7kp")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
-radius = 6.0
-max_speed = 50.0
+radius = 5.0
+max_speed = 130.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_67sa0")

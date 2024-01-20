@@ -27,7 +27,7 @@ var distance_to_player
 
 func _ready():
 	_on_wander_time_timeout()
-	$KnifePos/AttackTimer.start(3)
+	$KnifePos/AttackTimer.start(1.5)
 
 
 func _physics_process(delta):
