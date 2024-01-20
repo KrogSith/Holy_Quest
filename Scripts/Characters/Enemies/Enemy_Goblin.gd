@@ -65,6 +65,10 @@ func _physics_process(delta):
 func anim():
 	if velocity.x == 0 and velocity.y == 0:
 		$AnimatedSprite2D.play('Idle')
+		if player.global_position.x < global_position.x:
+			$AnimatedSprite2D.flip_h = true
+		elif player.global_position.x > global_position.x:
+			$AnimatedSprite2D.flip_h = false
 	else:
 		$AnimatedSprite2D.play('Run')
 	if velocity.x < 0:
@@ -119,12 +123,6 @@ func death():
 	$DeadBody.visible = true
 
 
-func _on_area_2d_body_entered(body):
-	if body.name == 'Player':
-		if body.damaged == false:
-			body.get_damage()
-
-
 func _on_see_timer_timeout():
 	$Wander_time.start(0.1)
 	current_state = State.Wander
@@ -132,8 +130,8 @@ func _on_see_timer_timeout():
 
 
 func _on_wander_time_timeout():
-	velocity.x = rng.randf_range(-40.0, 40.0)
-	velocity.y = rng.randf_range(-40.0, 40.0)
+	velocity.x = rng.randf_range(-100.0, 100.0)
+	velocity.y = rng.randf_range(-100.0, 100.0)
 	$Wander_time.wait_time = rng.randf_range(2, 5)
 
 

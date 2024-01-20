@@ -8,7 +8,7 @@ var radius = 5
 var dead = false
 var rng = RandomNumberGenerator.new()
 var damaged = false
-
+var knockback = Vector2.ZERO
 
 func _physics_process(delta):
 	if !dead:
@@ -58,6 +58,7 @@ func get_damage():
 	else: 
 		$HurtSound0.play()
 		damaged = true
+		velocity = knockback
 		self.visible = false
 		await get_tree().create_timer(0.1).timeout
 		self.visible = true
@@ -66,6 +67,7 @@ func get_damage():
 		await get_tree().create_timer(0.1).timeout
 		self.visible = true
 		damaged = false
+		velocity = Vector2.ZERO
 
 
 func death():

@@ -18,6 +18,7 @@ var current_state = State.Attack
 var rng = RandomNumberGenerator.new()
 var dead = false
 var hp = 1
+var body_inside = false
 
 
 func _ready():
@@ -126,8 +127,11 @@ func death():
 
 func _on_area_2d_body_entered(body):
 	if body.name == 'Player':
-		if body.damaged == false:
-			body.get_damage()
+		body_inside = true
+		while body_inside == true:
+			if body.damaged == false:
+				body.get_damage()
+			await get_tree().create_timer(1).timeout
 
 
 func _on_see_timer_timeout():
@@ -145,3 +149,7 @@ func _on_wander_time_timeout():
 func _on_make_path_timer_timeout():
 	makepath()
 	$MakePathTimer.start(0.5)
+
+
+func _on_area_2d_body_exited(body):
+	body_inside = false
