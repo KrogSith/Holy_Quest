@@ -38,7 +38,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Fly",
-"speed": 8.0
+"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_in5kc"]
@@ -59,6 +59,7 @@ script = ExtResource("1_1efq4")
 sprite_frames = SubResource("SpriteFrames_8ny78")
 animation = &"Fly"
 autoplay = "Fly"
+frame_progress = 0.587595
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_in5kc")
@@ -90,7 +91,6 @@ wait_time = 8.0
 avoidance_enabled = true
 radius = 4.0
 max_speed = 30.0
-debug_enabled = true
 
 [node name="MakePathTimer" type="Timer" parent="."]
 wait_time = 0.5

@@ -1,32 +1,40 @@
 extends CharacterBody2D
 
-
-const SPEED = 100.0#50.0
+const MAX_DISTANCE_TO_PLAYER = 100
+const MIN_DISTANCE_TO_PLAYER = 50
+const SPEED = 130.0#50.0
 const POV = 60.0
 
 @onready var player: CharacterBody2D = get_tree().current_scene.get_node('Player')#get_parent().get_node("Player")
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
+@export var Knife : PackedScene = preload('res://Scenes/Characters/Enemies/Enemy_Goblin/goblin_knife.tscn')
+#var knife : PackedScene = preload('res://Scenes/Characters/Enemies/Enemy_Goblin/goblin_knife.tscn')
 
 signal died
 
 enum State {
 	Wander,
-	Attack
+	Attack,
+	Idle
 }
 
 var current_state = State.Attack
 var rng = RandomNumberGenerator.new()
 var dead = false
-var hp = 1
+var hp = 3
+var distance_to_player
 
 
 func _ready():
 	_on_wander_time_timeout()
+	$KnifePos/AttackTimer.start(3)
 
 
 func _physics_process(delta):
 	if !dead:
-		state_switch()
+		if player.dead == true:
+			current_state = State.Wander
+		#state_switch()
 		match current_state:
 			State.Wander:
 				$See_timer.stop()
@@ -35,20 +43,21 @@ func _physics_process(delta):
 			State.Attack:
 				$Wander_time.stop()
 				if player.dead == false:
-					var space_state = get_world_2d().direct_space_state
-					var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
-					query.exclude = [self]
-					var result = space_state.intersect_ray(query)
-					if result['collider'] == player:
-						$MakePathTimer.stop()
-						var dir_to_player = global_position.direction_to(player.global_position)
-						velocity = dir_to_player*SPEED
-					else:
-						var dir_to_player = to_local(nav_agent.get_next_path_position()).normalized()
-						velocity = dir_to_player*SPEED
-						_on_make_path_timer_timeout()
+					var dir_to_player = to_local(nav_agent.get_next_path_position()).normalized()
+					velocity = dir_to_player*SPEED
+					_on_make_path_timer_timeout()
 				else:
 					_on_see_timer_timeout()
+			State.Idle:
+				velocity = Vector2.ZERO
+				var space_state = get_world_2d().direct_space_state
+				var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
+				query.exclude = [self]
+				var result = space_state.intersect_ray(query)
+				if result['collider'] == player:
+					attack()
+				_on_make_path_timer_timeout()
+				#else: current_state = State.Wander
 		anim()
 		move_and_slide()
 
@@ -62,21 +71,6 @@ func anim():
 		$AnimatedSprite2D.flip_h = true
 	elif velocity.x > 0:
 		$AnimatedSprite2D.flip_h = false
-
-
-func state_switch():
-	var player_distance = player.global_position - global_position
-	#if player_distance.length() <= POV:
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
-	query.exclude = [self]
-	var result = space_state.intersect_ray(query)
-	if player.dead == false:
-		if result['collider'] == player:
-			$See_timer.start()
-			current_state = State.Attack
-		else:
-			pass
 
 
 func makepath():
@@ -96,6 +90,7 @@ func get_damage():
 	if hp <= 0:
 		death()
 	else:
+		$HurtSound.play()
 		current_state = State.Attack
 	self.visible = false
 	await get_tree().create_timer(0.1).timeout
@@ -112,7 +107,7 @@ func death():
 	dead = true
 	$AnimatedSprite2D.queue_free()
 	$CollisionShape2D.queue_free()
-	$Area2D.queue_free()
+	#$Area2D.queue_free()
 	$NavigationAgent2D.queue_free()
 	$Wander_time.queue_free()
 	$See_timer.queue_free()
@@ -143,5 +138,44 @@ func _on_wander_time_timeout():
 
 
 func _on_make_path_timer_timeout():
-	makepath()
+	distance_to_player = (player.position - global_position).length()
+	#print(distance_to_player)
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
+	query.exclude = [self]
+	var result = space_state.intersect_ray(query)
+	if result['collider'] == player:
+		if distance_to_player > MAX_DISTANCE_TO_PLAYER:
+			makepath()
+			current_state = State.Attack
+		elif distance_to_player < MIN_DISTANCE_TO_PLAYER:
+			makepath_away()
+			current_state = State.Attack
+		else: current_state = State.Idle #velocity = Vector2.ZERO
+	else: makepath()
 	$MakePathTimer.start(0.5)
+	
+
+func makepath_away():
+	var dir = (global_position - player.position).normalized()
+	nav_agent.target_position = player.global_position + 100*dir
+
+func attack():
+	if $KnifePos/AttackTimer.time_left == 0:
+		$KnifePos.look_at(player.position)
+		var knife = Knife.instantiate()
+		#print(knife)
+		get_tree().current_scene.add_child(knife)#call_deferred("add_child", knife)
+		#get_parent().call_deferred("add_child", knife)
+		knife.transform = $KnifePos/Marker2D.global_transform
+		$KnifePos/AudioStreamPlayer2D.play()
+		$KnifePos/AttackTimer.start(1)
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,159 @@
+[gd_scene load_steps=22 format=3 uid="uid://7p5e1o3u0kym"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/Enemies/Enemy_Goblin.gd" id="1_uy7kp"]
+[ext_resource type="Texture2D" uid="uid://dx01qho14a6vr" path="res://Textures/Characters/Enemies/Goblin/goblin_idle_spritesheet.png" id="2_yf8ld"]
+[ext_resource type="Texture2D" uid="uid://crgfmnb3mfakr" path="res://Textures/Characters/Enemies/Goblin/goblin_run_spritesheet.png" id="3_pja8a"]
+[ext_resource type="Texture2D" uid="uid://cfqm401aqmkwd" path="res://Textures/Characters/Enemies/Goblin/Goblin_Dead_Body.png" id="4_fljcd"]
+[ext_resource type="AudioStream" uid="uid://bpqn4wi3u50qf" path="res://Audio/Sound/Enemies/Goblin/zvuki-goblina_death.mp3" id="5_x2i3k"]
+[ext_resource type="AudioStream" uid="uid://d3gl0y7a087p" path="res://Audio/Sound/Enemies/Goblin/KnifeThrowSound.mp3" id="6_hdsso"]
+[ext_resource type="AudioStream" uid="uid://bu7keuk8q6pf6" path="res://Audio/Sound/Enemies/Goblin/zvuki-goblina_hurt.mp3" id="6_n7a3y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q88j"]
+atlas = ExtResource("2_yf8ld")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcjjp"]
+atlas = ExtResource("2_yf8ld")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofogn"]
+atlas = ExtResource("2_yf8ld")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yw6pw"]
+atlas = ExtResource("2_yf8ld")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axw4h"]
+atlas = ExtResource("2_yf8ld")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vaegk"]
+atlas = ExtResource("2_yf8ld")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pcnw"]
+atlas = ExtResource("3_pja8a")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmkts"]
+atlas = ExtResource("3_pja8a")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri404"]
+atlas = ExtResource("3_pja8a")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oiys5"]
+atlas = ExtResource("3_pja8a")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvxfd"]
+atlas = ExtResource("3_pja8a")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6i6f"]
+atlas = ExtResource("3_pja8a")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_67sa0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3q88j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcjjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofogn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yw6pw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axw4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vaegk")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pcnw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmkts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri404")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oiys5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvxfd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6i6f")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 14.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tcbcg"]
+radius = 5.0
+height = 12.0
+
+[node name="Enemy_Goblin" type="CharacterBody2D" groups=["Enemies"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_uy7kp")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 6.0
+max_speed = 50.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_67sa0")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_tcbcg")
+metadata/_edit_lock_ = true
+
+[node name="DeadBody" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 4)
+texture = ExtResource("4_fljcd")
+
+[node name="Wander_time" type="Timer" parent="."]
+wait_time = 0.001
+autostart = true
+
+[node name="See_timer" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_x2i3k")
+volume_db = 10.0
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_n7a3y")
+
+[node name="MakePathTimer" type="Timer" parent="."]
+
+[node name="KnifePos" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="KnifePos"]
+
+[node name="AttackTimer" type="Timer" parent="KnifePos"]
+one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="KnifePos"]
+stream = ExtResource("6_hdsso")

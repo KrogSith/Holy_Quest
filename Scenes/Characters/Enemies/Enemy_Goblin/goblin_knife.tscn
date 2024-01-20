@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk3uj8n40tpd6"]
+
+[ext_resource type="Texture2D" uid="uid://bn3mqgdh3a646" path="res://Textures/Characters/Enemies/Goblin/goblin_knife.png" id="1_7baa3"]
+[ext_resource type="Script" path="res://Scripts/Characters/Enemies/Enemy_Golblin/goblin_knife.gd" id="1_gt8yj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgmm0"]
+radius = 1.0
+height = 10.0
+
+[node name="Goblin_Knife" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_gt8yj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.907571
+texture = ExtResource("1_7baa3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_wgmm0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

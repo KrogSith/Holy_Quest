@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 30.0
+const SPEED = 50#30.0
 const POV = 100.0
 
 signal died()
@@ -15,7 +15,7 @@ enum State {
 	Attack
 }
 
-var current_state = State.Wander
+var current_state = State.Attack
 var rng = RandomNumberGenerator.new()
 var dead = false
 var hp = 2
@@ -73,19 +73,19 @@ func _on_area_2d_body_entered(body):
 
 func state_switch():
 	var player_distance = player.global_position - global_position
-	if player_distance.length() <= POV:
+	#if player_distance.length() <= POV:
 		#print($RayCast2D.target_position)
-		var space_state = get_world_2d().direct_space_state
-		var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
-		query.exclude = [self]
-		var result = space_state.intersect_ray(query)
-		#print(result)
-		if player.dead == false:
-			if result['collider'] == player:
-				$See_timer.start()
-				current_state = State.Attack
-			else:
-				pass
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
+	query.exclude = [self]
+	var result = space_state.intersect_ray(query)
+	#print(result)
+	if player.dead == false:
+		if result['collider'] == player:
+			$See_timer.start()
+			current_state = State.Attack
+		else:
+			pass
 
 
 func makepath():

@@ -120,7 +120,6 @@ script = ExtResource("1_47pu8")
 avoidance_enabled = true
 radius = 6.0
 max_speed = 50.0
-debug_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2d7he")

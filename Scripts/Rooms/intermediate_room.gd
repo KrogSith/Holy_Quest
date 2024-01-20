@@ -8,7 +8,8 @@ var rng = RandomNumberGenerator.new()
 const SPAWN_EXPLOSION_SCENE : PackedScene = preload('res://Scenes/Effects/spawn_explosion.tscn')
 var enemy_scenes = {
 	'enemy_bat': preload('res://Scenes/Characters/Enemies/enemy_bat.tscn'),
-	'enemy_slime': preload('res://Scenes/Characters/Enemies/enemy_slime.tscn')
+	'enemy_slime': preload('res://Scenes/Characters/Enemies/enemy_slime.tscn'),
+	'enemy_goblin': preload('res://Scenes/Characters/Enemies/Enemy_Goblin/enemy_goblin.tscn')
 }
 
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cq0p0v3mdneyw"]
+[gd_scene load_steps=7 format=3 uid="uid://cq0p0v3mdneyw"]
 
 [ext_resource type="Script" path="res://Scripts/Rooms/start_room.gd" id="1_4alxa"]
 [ext_resource type="PackedScene" uid="uid://d2uo0ynslvkp6" path="res://Scenes/Tilemaps/tile_map.tscn" id="2_7q5qv"]
 [ext_resource type="PackedScene" uid="uid://bc884qfo76yo4" path="res://Scenes/Props/door.tscn" id="3_k1qwv"]
+[ext_resource type="PackedScene" uid="uid://syf88c348j6g" path="res://Scenes/Props/big_table.tscn" id="4_lytif"]
+[ext_resource type="PackedScene" uid="uid://dct16ikbii3yc" path="res://Scenes/Props/small_table.tscn" id="5_qbrmo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gcqw3"]
 size = Vector2(43.5, 28)
@@ -32,5 +34,11 @@ shape = SubResource("RectangleShape2D_gcqw3")
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(88, 40)
+
+[node name="Big_Table" parent="." instance=ExtResource("4_lytif")]
+position = Vector2(77, 77)
+
+[node name="Small_Table" parent="." instance=ExtResource("5_qbrmo")]
+position = Vector2(129, 116)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

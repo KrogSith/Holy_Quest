@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dct16ikbii3yc"]
+
+[ext_resource type="Texture2D" uid="uid://c65iuaip2o1ce" path="res://Textures/Tilemaps/full tilemap.png" id="1_bueka"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0g5e"]
+atlas = ExtResource("1_bueka")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b3cc3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0g5e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rtfci"]
+size = Vector2(16, 4)
+
+[node name="Small_Table" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_b3cc3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_rtfci")

@@ -1,12 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://dohkqqrqmjqbp"]
+[gd_scene load_steps=14 format=3 uid="uid://dohkqqrqmjqbp"]
 
 [ext_resource type="PackedScene" uid="uid://d2uo0ynslvkp6" path="res://Scenes/Tilemaps/tile_map.tscn" id="1_x6w71"]
 [ext_resource type="PackedScene" uid="uid://dotjiw8l07uqs" path="res://Scenes/Characters/player.tscn" id="2_biuah"]
 [ext_resource type="Texture2D" uid="uid://c5dl2vxe4ob3q" path="res://Textures/Characters/PriestLady/PriestLadyIdleAnimation-Sheet.png" id="2_w3awa"]
 [ext_resource type="AudioStream" uid="uid://b4wf6wh5fei64" path="res://Audio/Music/y2mate.is-Schubert-Ave-Maria-2H5rusicEnc-192k-1701021523.wav" id="3_rgxmr"]
-[ext_resource type="PackedScene" uid="uid://bf7jkljxrdi7f" path="res://Scenes/Characters/Enemies/enemy_bat.tscn" id="4_7j5j6"]
 [ext_resource type="PackedScene" uid="uid://syf88c348j6g" path="res://Scenes/Props/big_table.tscn" id="6_vgl4y"]
-[ext_resource type="PackedScene" uid="uid://jnbi4d33440i" path="res://Scenes/Characters/Enemies/enemy_slime.tscn" id="7_erch6"]
+[ext_resource type="PackedScene" uid="uid://7p5e1o3u0kym" path="res://Scenes/Characters/Enemies/Enemy_Goblin/enemy_goblin.tscn" id="8_0xkn8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bob0x"]
 atlas = ExtResource("2_w3awa")
@@ -81,26 +80,11 @@ autoplay = true
 max_distance = 120.0
 metadata/_edit_lock_ = true
 
-[node name="Enemy_Bat" parent="." instance=ExtResource("4_7j5j6")]
-position = Vector2(2333, 575)
-
 [node name="Player" parent="." instance=ExtResource("2_biuah")]
-position = Vector2(2193, 570)
+position = Vector2(2220, 623)
 
 [node name="Big_Table" parent="." instance=ExtResource("6_vgl4y")]
 position = Vector2(2207, 588)
 
-[node name="Enemy_Slime" parent="." instance=ExtResource("7_erch6")]
-position = Vector2(2090, 703)
-
-[node name="Enemy_Bat2" parent="." instance=ExtResource("4_7j5j6")]
-position = Vector2(2438, 641)
-
-[node name="Enemy_Bat3" parent="." instance=ExtResource("4_7j5j6")]
-position = Vector2(2306, 785)
-
-[node name="Enemy_Slime2" parent="." instance=ExtResource("7_erch6")]
-position = Vector2(2079, 496)
-
-[node name="Enemy_Slime3" parent="." instance=ExtResource("7_erch6")]
-position = Vector2(2083, 632)
+[node name="Enemy_Goblin" parent="." instance=ExtResource("8_0xkn8")]
+position = Vector2(2292, 704)
