@@ -9,6 +9,8 @@ var dead = false
 var rng = RandomNumberGenerator.new()
 var damaged = false
 var knockback = Vector2.ZERO
+var flying = false
+
 
 func _physics_process(delta):
 	if !dead:

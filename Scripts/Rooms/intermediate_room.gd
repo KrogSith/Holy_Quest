@@ -18,9 +18,19 @@ func open_doors():
 		door.open()
 
 
+func start_traps():
+	for trap in $Traps.get_children():
+		trap.start_work()
+
+
 func close_doors():
 	for door in $Doors.get_children():
 		door.close()
+
+
+func stop_traps():
+	for trap in $Traps.get_children():
+		trap.stop_work()
 
 
 func random_enemy():
@@ -46,11 +56,13 @@ func on_enemy_killed():
 	num_enemies -= 1
 	if num_enemies == 0:
 		open_doors()
+		stop_traps()
 
 
 func _on_player_detector_body_entered(body):
 	$PlayerDetector.queue_free()
 	close_doors()
+	start_traps()
 	spawn_enemies()
 
 

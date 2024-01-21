@@ -23,6 +23,8 @@ var rng = RandomNumberGenerator.new()
 var dead = false
 var hp = 3
 var distance_to_player
+var damaged = false
+var flying = false
 
 
 func _ready():
@@ -96,6 +98,7 @@ func get_damage():
 	else:
 		$HurtSound.play()
 		current_state = State.Attack
+	damaged = true
 	self.visible = false
 	await get_tree().create_timer(0.1).timeout
 	self.visible = true
@@ -103,6 +106,7 @@ func get_damage():
 	self.visible = false
 	await get_tree().create_timer(0.1).timeout
 	self.visible = true
+	damaged = false
 
 
 func death():

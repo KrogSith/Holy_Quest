@@ -52,4 +52,6 @@ position = Vector2(56, 120)
 position = Vector2(144, 176)
 shape = SubResource("RectangleShape2D_axo4u")
 
+[node name="Traps" type="Node2D" parent="."]
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

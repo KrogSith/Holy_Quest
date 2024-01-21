@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxy88jcif7w8n"]
+[gd_scene load_steps=6 format=3 uid="uid://cxy88jcif7w8n"]
 
 [ext_resource type="Script" path="res://Scripts/Rooms/intermediate_room.gd" id="1_a274d"]
 [ext_resource type="PackedScene" uid="uid://d2uo0ynslvkp6" path="res://Scenes/Tilemaps/tile_map.tscn" id="1_dgjsr"]
 [ext_resource type="PackedScene" uid="uid://bc884qfo76yo4" path="res://Scenes/Props/door.tscn" id="2_d7imn"]
+[ext_resource type="PackedScene" uid="uid://b324yms17rke5" path="res://Scenes/Props/Traps/spikes_trap.tscn" id="4_h2ggn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ihao1"]
 size = Vector2(74, 2)
@@ -49,5 +50,19 @@ position = Vector2(136, 56)
 y_sort_enabled = true
 position = Vector2(56, 160)
 shape = SubResource("RectangleShape2D_ihao1")
+
+[node name="Traps" type="Node2D" parent="."]
+
+[node name="Spikes_Trap" parent="Traps" instance=ExtResource("4_h2ggn")]
+position = Vector2(103, 72)
+
+[node name="Spikes_Trap2" parent="Traps" instance=ExtResource("4_h2ggn")]
+position = Vector2(119, 72)
+
+[node name="Spikes_Trap3" parent="Traps" instance=ExtResource("4_h2ggn")]
+position = Vector2(103, 88)
+
+[node name="Spikes_Trap4" parent="Traps" instance=ExtResource("4_h2ggn")]
+position = Vector2(119, 88)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

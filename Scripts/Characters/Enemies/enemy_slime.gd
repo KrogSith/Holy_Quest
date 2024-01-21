@@ -19,6 +19,8 @@ var rng = RandomNumberGenerator.new()
 var dead = false
 var hp = 1
 var body_inside = false
+var damaged = false
+var flying = false
 
 
 func _ready():
@@ -98,6 +100,7 @@ func get_damage():
 		death()
 	else:
 		current_state = State.Attack
+	damaged = true
 	self.visible = false
 	await get_tree().create_timer(0.1).timeout
 	self.visible = true
@@ -105,6 +108,7 @@ func get_damage():
 	self.visible = false
 	await get_tree().create_timer(0.1).timeout
 	self.visible = true
+	damaged = false
 
 
 func death():
