@@ -1,0 +1,83 @@
+[gd_scene load_steps=14 format=3 uid="uid://e2kct6ibikj2"]
+
+[ext_resource type="Texture2D" uid="uid://bqbdusby246j5" path="res://Textures/Props/Gramophone/gramophone.png" id="1_rf6i3"]
+[ext_resource type="AudioStream" uid="uid://d0gnix4axsp61" path="res://Audio/Music/a1___it_s_just_a_burning_memory-wPOF5FgG3DU-192k-1705860283.mp3" id="3_7s0li"]
+[ext_resource type="Texture2D" uid="uid://bxgaqrqevo03k" path="res://Textures/Props/Gramophone/musical_note.png" id="3_ajq55"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ga3rh"]
+atlas = ExtResource("1_rf6i3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vl8f"]
+atlas = ExtResource("1_rf6i3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aebtw"]
+atlas = ExtResource("1_rf6i3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3iot"]
+atlas = ExtResource("1_rf6i3")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3oiem"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ga3rh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vl8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aebtw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3iot")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_4abeh"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u6ji0"]
+gradient = SubResource("Gradient_4abeh")
+
+[sub_resource type="Curve" id="Curve_d4k41"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m5co8"]
+curve = SubResource("Curve_d4k41")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1di5t"]
+particle_flag_disable_z = true
+gravity = Vector3(-10, -2, 0)
+scale_curve = SubResource("CurveTexture_m5co8")
+color_ramp = SubResource("GradientTexture1D_u6ji0")
+turbulence_enabled = true
+turbulence_influence_min = 0.05
+turbulence_influence_max = 0.05
+
+[node name="Gramophone" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3oiem")
+animation = &"Run"
+autoplay = "Run"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7s0li")
+volume_db = -12.0
+autoplay = true
+attenuation = 61.82
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-3, -4)
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_1di5t")
+texture = ExtResource("3_ajq55")
+lifetime = 3.0

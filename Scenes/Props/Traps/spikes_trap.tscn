@@ -103,7 +103,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kfs05"]
-size = Vector2(16, 16)
+size = Vector2(16, 8)
 
 [node name="Spikes_Trap" type="Area2D"]
 script = ExtResource("1_cmslg")
@@ -113,6 +113,7 @@ sprite_frames = SubResource("SpriteFrames_xypx4")
 animation = &"Run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_kfs05")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

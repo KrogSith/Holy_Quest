@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnht7pk1ivpqb"]
+[gd_scene load_steps=7 format=3 uid="uid://cnht7pk1ivpqb"]
 
 [ext_resource type="PackedScene" uid="uid://d2uo0ynslvkp6" path="res://Scenes/Tilemaps/tile_map.tscn" id="1_8ci88"]
 [ext_resource type="Script" path="res://Scripts/Rooms/end_room.gd" id="1_t36vf"]
 [ext_resource type="PackedScene" uid="uid://bc884qfo76yo4" path="res://Scenes/Props/door.tscn" id="2_fm4sh"]
 [ext_resource type="PackedScene" uid="uid://dct16ikbii3yc" path="res://Scenes/Props/small_table.tscn" id="4_ydoed"]
+[ext_resource type="PackedScene" uid="uid://e2kct6ibikj2" path="res://Scenes/Props/gramophone.tscn" id="5_lq846"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_23mge"]
 size = Vector2(96, 3.5)
@@ -43,5 +44,8 @@ position = Vector2(104, 104)
 
 [node name="Small_Table" parent="." instance=ExtResource("4_ydoed")]
 position = Vector2(52, 64)
+
+[node name="Gramophone" parent="." instance=ExtResource("5_lq846")]
+position = Vector2(121, 50)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
