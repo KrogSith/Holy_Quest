@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://7p5e1o3u0kym"]
 
-[ext_resource type="Script" path="res://Scripts/Characters/Enemies/Enemy_Goblin.gd" id="1_uy7kp"]
+[ext_resource type="Script" path="res://Scripts/Characters/Enemies/Enemy_Golblin/Enemy_Goblin.gd" id="1_uy7kp"]
 [ext_resource type="Texture2D" uid="uid://dx01qho14a6vr" path="res://Textures/Characters/Enemies/Goblin/goblin_idle_spritesheet.png" id="2_yf8ld"]
 [ext_resource type="Texture2D" uid="uid://crgfmnb3mfakr" path="res://Textures/Characters/Enemies/Goblin/goblin_run_spritesheet.png" id="3_pja8a"]
 [ext_resource type="Texture2D" uid="uid://cfqm401aqmkwd" path="res://Textures/Characters/Enemies/Goblin/Goblin_Dead_Body.png" id="4_fljcd"]
