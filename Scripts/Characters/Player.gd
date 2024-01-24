@@ -106,10 +106,10 @@ func shoot():
 	#$Weapon/Sprite2D.rotation_degrees -= 5
 	owner.add_child(bullet)
 	bullet.transform = $Weapon/Marker2D.global_transform
-	$Weapon/GPUParticles2D.emitting = true
 	$Weapon/ShootSound.play()
-	#await get_tree().create_timer(0.5).timeout
-	#$Weapon/Gilza.play()
+	$Weapon/GPUParticles2D.emitting = true
+	await get_tree().create_timer(0.25).timeout
+	$Weapon/GPUParticles2D.emitting = false#$Weapon/Gilza.play()
 
 
 

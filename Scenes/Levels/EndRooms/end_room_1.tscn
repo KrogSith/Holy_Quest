@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6wxpv7kghsm0"]
+
+[ext_resource type="PackedScene" uid="uid://d2uo0ynslvkp6" path="res://Scenes/Tilemaps/tile_map.tscn" id="1_4t7ok"]
+[ext_resource type="Script" path="res://Scripts/Rooms/end_room.gd" id="1_mteme"]
+[ext_resource type="PackedScene" uid="uid://bc884qfo76yo4" path="res://Scenes/Props/door.tscn" id="2_djj76"]
+[ext_resource type="PackedScene" uid="uid://syf88c348j6g" path="res://Scenes/Props/big_table.tscn" id="2_q2akq"]
+[ext_resource type="PackedScene" uid="uid://dct16ikbii3yc" path="res://Scenes/Props/small_table.tscn" id="3_7w07h"]
+[ext_resource type="PackedScene" uid="uid://e2kct6ibikj2" path="res://Scenes/Props/gramophone.tscn" id="4_xs20b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdid4"]
+size = Vector2(8, 23)
+
+[node name="EndRoom1" type="Node2D"]
+script = ExtResource("1_mteme")
+
+[node name="TileMap" parent="." instance=ExtResource("1_4t7ok")]
+layer_0/tile_data = PackedInt32Array(196615, 196608, 1, 196609, 196608, 1, 262145, 196608, 1, 327681, 196608, 1, 393217, 196608, 1, 393218, 196608, 1, 393219, 0, 4, 393220, 0, 4, 393221, 196608, 1, 393222, 196608, 1, 393223, 196608, 1, 327687, 196608, 1, 262151, 196608, 1, 327686, 196608, 1, 327685, 196608, 1, 327684, 0, 4, 327683, 0, 4, 327682, 196608, 1, 262146, 196608, 1, 262147, 196608, 1, 262148, 196608, 1, 262149, 196608, 1, 262150, 196608, 1, 196614, 196608, 1, 196613, 196608, 1, 196612, 196608, 1, 196611, 196608, 1, 196610, 196608, 1, 458757, 196608, 1, 458758, 196608, 1, 131074, 196608, 1, 131075, 196608, 1, 131076, 65536, 3, 131077, 196608, 1, 131078, 196608, 1, 65539, 458752, 4, 65540, 458752, 4, 65541, 524288, 5, 65542, 458752, 4, 131079, 196608, 1, 131073, 196608, 1, 65538, 393216, 5, 65537, 458752, 4, 458753, 196608, 1, 458754, 196608, 1, 458755, 196608, 1, 458756, 196608, 1, 65543, 458752, 4, 458759, 196608, 1, 65544, 458752, 4, 131080, 196608, 1, 196616, 196608, 1, 262152, 196608, 1, 327688, 196608, 1, 393224, 196608, 1, 327689, 458752, 4, 393225, 196608, 1, 458761, 196608, 1, 327690, 458752, 5, 393226, 196608, 1, 458762, 196608, 1, 327691, 458752, 4, 393227, 196608, 1, 458763, 196608, 1, 327692, 458752, 4, 393228, 196608, 1, 458764, 196608, 1, 524299, 196608, 1, 458760, 196608, 1, 327693, 393216, 5, 524295, 196608, 1, 524294, 196608, 1, 524293, 196608, 1, 524292, 196608, 1, 524291, 196608, 1, 524290, 196608, 1, 524289, 196608, 1, 393229, 196608, 1, 458765, 196608, 1, 524300, 196608, 1)
+layer_1/tile_data = PackedInt32Array(327689, 262144, 1, 65539, 196608, 0, 327691, 196608, 0)
+
+[node name="TileMap2" parent="." instance=ExtResource("1_4t7ok")]
+z_index = 2
+layer_0/tile_data = PackedInt32Array(131072, 262144, 5, 196608, 262144, 5, 262144, 262144, 5, 327680, 262144, 5, 393216, 262144, 5, 393218, 262144, 6, 393219, 131072, 6, 393220, 131072, 6, 6, 131072, 7, 2, 131072, 7, 7, 131072, 7, 65536, 262144, 5, 1, 131072, 7, 393221, 196608, 6, 3, 131072, 7, 4, 131072, 7, 5, 131072, 7, 8, 131072, 7, 9, 196608, 4, 0, 262144, 4, 458752, 262144, 5, 65545, 196608, 5, 131081, 196608, 5, 262149, 196608, 4, 262146, 262144, 4, 262147, 131072, 7, 262148, 131072, 7, 327685, 196608, 5, 327682, 262144, 5, 524288, 262144, 6, 524289, 131072, 6, 524290, 131072, 6, 524291, 131072, 6, 524292, 131072, 6, 524293, 131072, 6, 524294, 131072, 6, 524295, 131072, 6, 524296, 196608, 6, 458760, 65536, 6, 458762, 327680, 6, 262155, 131072, 7, 262156, 131072, 7, 262157, 131072, 7, 458765, 65536, 6, 524298, 262144, 5, 524301, 196608, 5, 262158, 196608, 4, 327694, 196608, 5, 393230, 196608, 5, 458766, 196608, 6, 196617, 196608, 5, 262153, 65536, 7, 262154, 131072, 7, 458761, 131072, 6, 458764, 524288, 6, 458763, 458752, 6)
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="Door" parent="Doors" instance=ExtResource("2_djj76")]
+position = Vector2(192, 128)
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+y_sort_enabled = true
+position = Vector2(149.5, 108.688)
+shape = SubResource("RectangleShape2D_xdid4")
+
+[node name="Entrance" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Entrance"]
+position = Vector2(184, 120)
+
+[node name="Marker2D2" type="Marker2D" parent="Entrance"]
+position = Vector2(200, 120)
+
+[node name="Small_Table" parent="." instance=ExtResource("3_7w07h")]
+position = Vector2(95, 93)
+
+[node name="Gramophone" parent="." instance=ExtResource("4_xs20b")]
+position = Vector2(98, 35)
+
+[node name="Big_Table" parent="." instance=ExtResource("2_q2akq")]
+position = Vector2(124, 34)
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

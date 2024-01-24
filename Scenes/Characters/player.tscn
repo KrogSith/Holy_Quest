@@ -133,9 +133,13 @@ angle_min = -720.0
 angle_max = 720.0
 spread = 180.0
 flatness = 1.0
-gravity = Vector3(50, 50, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
 tangential_accel_min = -100.0
 tangential_accel_max = 100.0
+scale_min = 0.5
+scale_max = 1.5
 scale_curve = SubResource("CurveTexture_aj7dj")
 color_ramp = SubResource("GradientTexture1D_ecq4y")
 turbulence_enabled = true
@@ -187,13 +191,12 @@ metadata/_edit_lock_ = true
 one_shot = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Weapon"]
-position = Vector2(4, 0)
+position = Vector2(5, 0)
 emitting = false
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_f2i8s")
 lifetime = 0.5
-one_shot = true
-speed_scale = 5.0
+explosiveness = 1.0
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_uo374")
