@@ -81,7 +81,7 @@ func anim():
 
 func makepath():
 	nav_agent.target_position = player.global_position
-	current_state = State.Attack
+	#current_state = State.Attack
 
 
 func isColliding():
@@ -157,7 +157,6 @@ func _on_make_path_timer_timeout():
 		else: current_state = State.Idle #velocity = Vector2.ZERO
 	else: 
 		makepath()
-		print('YES')
 	$MakePathTimer.start(0.5)
 	
 
