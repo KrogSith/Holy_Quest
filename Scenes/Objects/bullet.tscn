@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bny6aec7ldh1f" path="res://Textures/Weapones/Bullet.png" id="1_g8kor"]
 [ext_resource type="Script" path="res://Scripts/Objects/bullet.gd" id="1_hyn6n"]
-[ext_resource type="AudioStream" uid="uid://d32v2tuahnw0w" path="res://Audio/Sound/Weapon/rikoshet-puli-556.mp3" id="3_y5rjx"]
+[ext_resource type="AudioStream" uid="uid://d32v2tuahnw0w" path="res://Audio/Sound/Weapons/DB_Shotgun/rikoshet-puli-556.mp3" id="3_y5rjx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fbhib"]
 radius = 2.23607

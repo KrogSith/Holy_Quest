@@ -32,12 +32,13 @@ func anim():
 
 
 func actions():
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and $AnimationPlayer.is_playing() == false:
 		attack()
 
 
 func attack():
 	$AnimationPlayer.play('Attack')
+	$AudioStreamPlayer2D.play()
 
 
 func _on_area_2d_body_entered(body):

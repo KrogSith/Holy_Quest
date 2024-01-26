@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://nc7ltsbxv580" path="res://Textures/Weapones/DBShotgun.png" id="1_774vs"]
 [ext_resource type="Script" path="res://Scripts/Objects/Weapones/weapon_db_shotgun.gd" id="1_28642"]
-[ext_resource type="AudioStream" uid="uid://dklsqfvyblnwt" path="res://Audio/Sound/Weapon/gun-shotgun-blast-shot_mkkqx5ed.mp3" id="2_k0nxb"]
-[ext_resource type="AudioStream" uid="uid://cbvsu0hw7717b" path="res://Audio/Sound/Weapon/shotgun-shell-drop_f1mq3ieu.mp3" id="3_7k8sd"]
+[ext_resource type="AudioStream" uid="uid://dklsqfvyblnwt" path="res://Audio/Sound/Weapons/DB_Shotgun/gun-shotgun-blast-shot_mkkqx5ed.mp3" id="3_xafpq"]
+[ext_resource type="AudioStream" uid="uid://cbvsu0hw7717b" path="res://Audio/Sound/Weapons/DB_Shotgun/shotgun-shell-drop_f1mq3ieu.mp3" id="4_20ycq"]
 
 [sub_resource type="Gradient" id="Gradient_jncbt"]
 offsets = PackedFloat32Array(0, 0.508197, 1)
@@ -53,11 +53,11 @@ position = Vector2(4, 0)
 metadata/_edit_lock_ = true
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_k0nxb")
+stream = ExtResource("3_xafpq")
 metadata/_edit_lock_ = true
 
 [node name="Gilza" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_7k8sd")
+stream = ExtResource("4_20ycq")
 metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="."]

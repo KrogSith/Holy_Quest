@@ -21,6 +21,7 @@ var hp = 1
 var body_inside = false
 var damaged = false
 var flying = false
+var damage = 1
 
 
 func _ready():
@@ -134,7 +135,7 @@ func _on_area_2d_body_entered(body):
 		body_inside = true
 		while body_inside == true:
 			if body.damaged == false:
-				body.get_damage()
+				body.get_damage(damage)
 			await get_tree().create_timer(1).timeout
 
 

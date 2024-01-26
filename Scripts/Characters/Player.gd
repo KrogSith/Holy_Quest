@@ -63,8 +63,8 @@ func weapon_switch():
 				weapon.queue_free()
 			$Weapon.add_child(sword.instantiate())
 
-func get_damage():
-	healthbar.value -= 15
+func get_damage(damage_got):
+	healthbar.value -= damage_got*15
 	if healthbar.value <= 0:
 		death()
 	else: 

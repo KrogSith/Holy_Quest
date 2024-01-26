@@ -3,6 +3,8 @@ extends Area2D
 
 var work = false
 var body_inside = false
+var damage = 2
+
 
 func _ready():
 	$CollisionShape2D.set_deferred("disabled", true)
@@ -35,7 +37,7 @@ func _on_body_entered(body):
 		body_inside = true
 		while body_inside == true:
 			if body.damaged == false:
-				body.get_damage()
+				body.get_damage(damage)
 			await get_tree().create_timer(1).timeout
 	else: pass
 
