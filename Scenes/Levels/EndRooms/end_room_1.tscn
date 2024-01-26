@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://e2kct6ibikj2" path="res://Scenes/Props/gramophone.tscn" id="4_xs20b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xdid4"]
-size = Vector2(8, 23)
+size = Vector2(8, 30.188)
 
 [node name="EndRoom1" type="Node2D"]
 script = ExtResource("1_mteme")
@@ -30,7 +30,7 @@ position = Vector2(192, 128)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 y_sort_enabled = true
-position = Vector2(149.5, 108.688)
+position = Vector2(149.5, 105.094)
 shape = SubResource("RectangleShape2D_xdid4")
 
 [node name="Entrance" type="Node2D" parent="."]

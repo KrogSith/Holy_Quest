@@ -32,7 +32,6 @@ metadata/_edit_lock_ = true
 [node name="Rooms" type="Node2D" parent="."]
 y_sort_enabled = true
 script = ExtResource("4_0mpws")
-num_levels = 5
 
 [node name="Player" parent="." instance=ExtResource("5_gfpqj")]
 position = Vector2(21, 142)
