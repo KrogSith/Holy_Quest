@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://djddk584srl2n"]
+
+[ext_resource type="Texture2D" uid="uid://nc7ltsbxv580" path="res://Textures/Weapones/DBShotgun.png" id="1_774vs"]
+[ext_resource type="Script" path="res://Scripts/Objects/Weapones/weapon_db_shotgun.gd" id="1_28642"]
+[ext_resource type="AudioStream" uid="uid://dklsqfvyblnwt" path="res://Audio/Sound/Weapon/gun-shotgun-blast-shot_mkkqx5ed.mp3" id="2_k0nxb"]
+[ext_resource type="AudioStream" uid="uid://cbvsu0hw7717b" path="res://Audio/Sound/Weapon/shotgun-shell-drop_f1mq3ieu.mp3" id="3_7k8sd"]
+
+[sub_resource type="Gradient" id="Gradient_jncbt"]
+offsets = PackedFloat32Array(0, 0.508197, 1)
+colors = PackedColorArray(0.944411, 0, 0.216728, 1, 0.741176, 0.431373, 0, 1, 0.984314, 0.968627, 0.941176, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ecq4y"]
+gradient = SubResource("Gradient_jncbt")
+
+[sub_resource type="Curve" id="Curve_8dwaj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.417582), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_aj7dj"]
+curve = SubResource("Curve_8dwaj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fvdqo"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -100.0
+tangential_accel_max = 100.0
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_aj7dj")
+color_ramp = SubResource("GradientTexture1D_ecq4y")
+turbulence_enabled = true
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 1.0
+
+[node name="Weapon_DB_Shotgun" type="Node2D"]
+position = Vector2(0, 2)
+script = ExtResource("1_28642")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_774vs")
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(4, 0)
+metadata/_edit_lock_ = true
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_k0nxb")
+metadata/_edit_lock_ = true
+
+[node name="Gilza" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7k8sd")
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(5, 0)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_fvdqo")
+lifetime = 0.5
+explosiveness = 1.0

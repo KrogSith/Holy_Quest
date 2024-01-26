@@ -45,7 +45,7 @@ animations = [{
 radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f7w0c"]
-radius = 7.0
+radius = 5.0
 
 [node name="Enemy_Bat" type="CharacterBody2D" groups=["Enemies"]]
 y_sort_enabled = true

@@ -14,6 +14,8 @@ func _on_body_entered(body):
 			body.get_damage()
 			queue_free()
 	else:
-		#queue_free()
-		speed = 0
-		$CollisionShape2D.queue_free()
+		if body.name == 'Door':
+			queue_free()
+		else:
+			speed = 0
+			$CollisionShape2D.queue_free()

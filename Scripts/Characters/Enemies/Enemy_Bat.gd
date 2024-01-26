@@ -106,8 +106,8 @@ func isColliding():
 	return isColliding
 
 
-func get_damage():
-	hp -= 1
+func get_damage(damage_got):
+	hp -= damage_got
 	if hp <= 0:
 		death()
 	else:

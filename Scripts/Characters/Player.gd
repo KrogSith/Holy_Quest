@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-
-@export var Bullet : PackedScene
+var db_shotgun = preload("res://Scenes/Objects/Weapons/weapon_db_shotgun.tscn")
+var sword = preload("res://Scenes/Objects/Weapons/weapon_sword.tscn")
 @onready var healthbar : TextureProgressBar = get_parent().get_node("UI/HealthBar")
 const SPEED = 150.0
 var radius = 5
@@ -12,16 +12,21 @@ var knockback = Vector2.ZERO
 var flying = false
 
 
+func _ready():
+	$Weapon.add_child(sword.instantiate())
+	#$Weapon.add_child(db_shotgun.instantiate())
+	
+
 func _physics_process(delta):
 	if !dead:
 		movement()
-		actions()
 		anim()
-		weapon()
+		weapon_switch()
 	
 		move_and_slide()
 	else:
 		pass
+		
 	if Input.is_action_just_pressed("game_restart"):
 		get_tree().reload_current_scene()
 
@@ -29,12 +34,6 @@ func _physics_process(delta):
 func movement():
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = direction * SPEED
-
-
-func actions():
-	if Input.is_action_just_pressed('shoot') and $Weapon/Timer.time_left == 0:
-		shoot()
-		$Weapon/Timer.start()
 
 
 func anim():
@@ -52,9 +51,20 @@ func anim():
 		$AnimatedSprite2D.play('Run')
 
 
+func weapon_switch():
+	if $Weapon.get_child(0).name == 'Weapon_Sword':
+		if Input.is_key_pressed(KEY_2) and $Weapon.get_child(0).animation_in_progress == false:
+			for weapon in $Weapon.get_children():
+				weapon.queue_free()
+			$Weapon.add_child(db_shotgun.instantiate())
+	if $Weapon.get_child(0).name == 'Weapon_DB_Shotgun':
+		if Input.is_key_pressed(KEY_1):
+			for weapon in $Weapon.get_children():
+				weapon.queue_free()
+			$Weapon.add_child(sword.instantiate())
+
 func get_damage():
 	healthbar.value -= 15
-	#print(healthbar.value)
 	if healthbar.value <= 0:
 		death()
 	else: 
@@ -86,30 +96,6 @@ func death():
 	else:
 		pass
 	$Sprite2D.visible = true
-
-
-func weapon():
-	var mpos = get_global_mouse_position()
-	var mouse = get_viewport().get_mouse_position()
-	var res = get_viewport().size
-	$Weapon/Sprite2D.texture = load('res://Textures/Weapones/DBShotgun.png')
-	$Weapon.look_at(mpos)
-	if mouse.x < res.x/2:
-		$Weapon/Sprite2D.flip_v = true
-	elif mouse.x > res.x/2:
-		$Weapon/Sprite2D.flip_v = false
-
-
-func shoot():
-	var bullet = Bullet.instantiate()
-	#$Weapon/Sprite2D.position.x -= 5
-	#$Weapon/Sprite2D.rotation_degrees -= 5
-	owner.add_child(bullet)
-	bullet.transform = $Weapon/Marker2D.global_transform
-	$Weapon/ShootSound.play()
-	$Weapon/GPUParticles2D.emitting = true
-	await get_tree().create_timer(0.25).timeout
-	$Weapon/GPUParticles2D.emitting = false#$Weapon/Gilza.play()
 
 
 
