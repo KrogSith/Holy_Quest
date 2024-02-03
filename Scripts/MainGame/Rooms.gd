@@ -13,7 +13,7 @@ const LEFT_WALL_TILE = Vector2i(4, 5)
 const RIGHT_WALL_TILE = Vector2i(3, 5)
 const FLOOR_TILE = Vector2i(2, 1)
 
-@export var num_levels = 2
+@export var num_levels = 5
 #@onready var player: CharacterBody2D = get_tree().current_scene.get_node('Player')
 
 
