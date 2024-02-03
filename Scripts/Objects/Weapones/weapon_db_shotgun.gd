@@ -2,11 +2,16 @@ extends Node2D
 
 
 @export var Bullet : PackedScene = preload("res://Scenes/Objects/bullet.tscn")
+@export var equipped = false
 
 
 func _process(delta):
+	if equipped == false:
+		visible = false
 	anim()
-	actions()
+	if equipped == true:
+		visible = true
+		actions()
 
 
 func anim():
@@ -36,3 +41,5 @@ func shoot():
 	await get_tree().create_timer(0.25).timeout
 	$GPUParticles2D.emitting = false
 	#$Gilza.play()
+
+

@@ -1,8 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://dotjiw8l07uqs"]
+[gd_scene load_steps=23 format=3 uid="uid://dotjiw8l07uqs"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player.gd" id="1_8qply"]
 [ext_resource type="Texture2D" uid="uid://bbbk0bpwv7vdx" path="res://Textures/Characters/Player/PriestIdleAnimation-Sheet.png" id="2_ojrky"]
 [ext_resource type="Texture2D" uid="uid://bpsdw5l81vnss" path="res://Textures/Characters/Player/PriestRunAnimation.png" id="3_nnl0r"]
+[ext_resource type="PackedScene" uid="uid://djddk584srl2n" path="res://Scenes/Objects/Weapons/weapon_db_shotgun.tscn" id="7_ku17j"]
+[ext_resource type="PackedScene" uid="uid://babkgsn6p2t0g" path="res://Scenes/Objects/Weapons/weapon_sword.tscn" id="8_1jth2"]
 [ext_resource type="AudioStream" uid="uid://b0e0o5e52dsj0" path="res://Audio/Sound/Player/72ea3dd5d54f91f.mp3" id="8_uo374"]
 [ext_resource type="Texture2D" uid="uid://g4xiaa272ubm" path="res://Textures/Characters/Player/Player_Dead.png" id="9_s0w08"]
 [ext_resource type="AudioStream" uid="uid://wluislmllahj" path="res://Audio/Sound/Player/zvuk-boli-87.mp3" id="10_ruu4o"]
@@ -141,3 +143,7 @@ position = Vector2(-1, 4)
 texture = ExtResource("9_s0w08")
 
 [node name="Weapon" type="Node2D" parent="."]
+
+[node name="Weapon_DB_Shotgun" parent="Weapon" instance=ExtResource("7_ku17j")]
+
+[node name="Weapon_Sword" parent="Weapon" instance=ExtResource("8_1jth2")]

@@ -52,16 +52,29 @@ func anim():
 
 
 func weapon_switch():
-	if $Weapon.get_child(0).name == 'Weapon_Sword':
-		if Input.is_key_pressed(KEY_2) and $Weapon.get_child(0).animation_in_progress == false:
-			for weapon in $Weapon.get_children():
-				weapon.queue_free()
-			$Weapon.add_child(db_shotgun.instantiate())
-	if $Weapon.get_child(0).name == 'Weapon_DB_Shotgun':
-		if Input.is_key_pressed(KEY_1):
-			for weapon in $Weapon.get_children():
-				weapon.queue_free()
-			$Weapon.add_child(sword.instantiate())
+	if Input.is_key_pressed(KEY_2):
+		for weapon in $Weapon.get_children():
+				if weapon.name != 'Weapon_DB_Shotgun':
+					weapon.equipped = false
+				else:
+					weapon.equipped = true
+	elif Input.is_key_pressed(KEY_1):
+		for weapon in $Weapon.get_children():
+				if weapon.name != 'Weapon_Sword':
+					weapon.equipped = false
+				else:
+					weapon.equipped = true
+	#if $Weapon.get_child(0).name == 'Weapon_Sword':
+		#if Input.is_key_pressed(KEY_2) and $Weapon.get_child(0).animation_in_progress == false:
+			#for weapon in $Weapon.get_children():
+				#weapon.queue_free()
+			#$Weapon.add_child(db_shotgun.instantiate())
+	#if $Weapon.get_child(0).name == 'Weapon_DB_Shotgun':
+		#if Input.is_key_pressed(KEY_1):
+			#for weapon in $Weapon.get_children():
+				#weapon.queue_free()
+			#$Weapon.add_child(sword.instantiate())
+
 
 func get_damage(damage_got):
 	healthbar.value -= damage_got*15

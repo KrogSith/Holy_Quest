@@ -5,6 +5,7 @@ var mouse_dir : Vector2
 var body_inside = false
 var animation_in_progress = false
 @export var damage = 2
+@export var equipped = true
 
 
 func _ready():
@@ -12,8 +13,12 @@ func _ready():
 
 
 func _process(delta):
+	if equipped == false:
+		visible = false
 	anim()
-	actions()
+	if equipped == true:
+		visible = true
+		actions()
 	############################
 	if $AnimationPlayer.is_playing() == true:
 		animation_in_progress == true
@@ -53,7 +58,6 @@ func _on_area_2d_body_entered(body):
 
 func _on_area_2d_body_exited(body):
 	body_inside = false
-	
 
 
 
@@ -64,4 +68,5 @@ func _on_area_2d_body_exited(body):
 
 
 
-	
+
+
