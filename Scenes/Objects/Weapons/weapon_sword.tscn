@@ -158,6 +158,7 @@ _data = {
 [node name="Weapon_Sword" type="Node2D"]
 rotation = -1.5708
 script = ExtResource("1_ihy2c")
+damage = 3
 metadata/_edit_lock_ = true
 
 [node name="Sword" type="Node2D" parent="."]

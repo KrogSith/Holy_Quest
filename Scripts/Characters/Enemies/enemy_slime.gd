@@ -105,10 +105,13 @@ func get_damage(damage_got):
 	self.visible = false
 	await get_tree().create_timer(0.1).timeout
 	self.visible = true
+	velocity = Vector2.ZERO
 	await get_tree().create_timer(0.1).timeout
 	self.visible = false
+	velocity = Vector2.ZERO
 	await get_tree().create_timer(0.1).timeout
 	self.visible = true
+	velocity = Vector2.ZERO
 	damaged = false
 
 
