@@ -9,6 +9,7 @@ signal died()
 @onready var player: CharacterBody2D = get_tree().current_scene.get_node('Player')#get_parent().get_node("Player")
 #@export var player: CharacterBody2D
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
+@onready var hit_explosion = preload('res://Scenes/Effects/hit_explosion.tscn')
 
 enum State {
 	Wander,
@@ -108,6 +109,9 @@ func isColliding():
 
 
 func get_damage(damage_got):
+	add_child(hit_explosion.instantiate())
+	if $AnimatedSprite2D.flip_h == true:
+		$HitExplosion.flip_h = true
 	hp -= damage_got
 	if hp <= 0:
 		death()

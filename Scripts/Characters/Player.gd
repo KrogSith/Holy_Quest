@@ -47,8 +47,10 @@ func anim():
 		
 	if velocity.x == 0 and velocity.y == 0:
 		$AnimatedSprite2D.play('Idle')
+		$DustParticles.set_emitting(false)
 	else:
 		$AnimatedSprite2D.play('Run')
+		$DustParticles.set_emitting(true)
 
 
 func weapon_switch():

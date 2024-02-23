@@ -2,8 +2,8 @@ extends Area2D
 
 
 var speed = 450
-var damage = 1
-var spread = Vector2(randf_range(-1, 1), randf_range(-1, 1))
+var damage = 0.5
+var spread = Vector2(randf_range(-1.5, 1.5), randf_range(-1.5, 1.5))
 
 
 func _physics_process(delta):
@@ -12,7 +12,8 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("Enemies"):
-		body.get_damage(damage)
+		if body.dead == false:
+			body.get_damage(damage)
 		queue_free()
 	else:
 		$InWall.play()

@@ -33,9 +33,10 @@ func actions():
 
 
 func shoot():
-	var bullet = Bullet.instantiate()
-	get_tree().current_scene.add_child(bullet)
-	bullet.global_transform = $Marker2D.global_transform
+	for i in range(4):
+		var bullet = Bullet.instantiate()
+		get_tree().current_scene.add_child(bullet)
+		bullet.global_transform = $Marker2D.global_transform
 	$ShootSound.play()
 	$GPUParticles2D.emitting = true
 	await get_tree().create_timer(0.25).timeout

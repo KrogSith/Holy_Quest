@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dotjiw8l07uqs"]
+[gd_scene load_steps=24 format=3 uid="uid://dotjiw8l07uqs"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player.gd" id="1_8qply"]
 [ext_resource type="Texture2D" uid="uid://bbbk0bpwv7vdx" path="res://Textures/Characters/Player/PriestIdleAnimation-Sheet.png" id="2_ojrky"]
@@ -110,6 +110,10 @@ animations = [{
 radius = 4.0
 height = 12.0
 
+[sub_resource type="Curve" id="Curve_21g3h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 5
@@ -147,3 +151,18 @@ texture = ExtResource("9_s0w08")
 [node name="Weapon_DB_Shotgun" parent="Weapon" instance=ExtResource("7_ku17j")]
 
 [node name="Weapon_Sword" parent="Weapon" instance=ExtResource("8_1jth2")]
+
+[node name="DustParticles" type="CPUParticles2D" parent="."]
+position = Vector2(0, 6)
+amount = 2
+lifetime = 0.5
+randomness = 1.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_21g3h")
+color = Color(0.792157, 0.792157, 0.792157, 1)

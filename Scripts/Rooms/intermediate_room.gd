@@ -1,7 +1,8 @@
 extends Node2D
 
 
-@onready var num_enemies = $EnemyPositions.get_child_count()
+#@onready var num_enemies = $EnemyPositions.get_child_count()
+var num_enemies = 0
 
 var rng = RandomNumberGenerator.new()
 
@@ -46,6 +47,8 @@ func spawn_enemies():
 		var __ = enemy.died.connect(self.on_enemy_killed)
 		enemy.position = enemy_pos.position
 		call_deferred("add_child", enemy)
+		num_enemies += 1
+		print(num_enemies)
 		
 		var explosion : AnimatedSprite2D = SPAWN_EXPLOSION_SCENE.instantiate()
 		explosion.position = enemy_pos.position
@@ -54,6 +57,7 @@ func spawn_enemies():
 
 func on_enemy_killed():
 	num_enemies -= 1
+	print('Num of enemies left:', num_enemies)
 	if num_enemies == 0:
 		open_doors()
 		stop_traps()

@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqhbk6m7sxvr5"]
+
+[ext_resource type="Texture2D" uid="uid://dbpmvbsff1cnt" path="res://Textures/Effects/hit_effect_anim_spritesheet.png" id="1_wyc4p"]
+[ext_resource type="Script" path="res://Scripts/Effects/hit_explosion.gd" id="2_g4suq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idkte"]
+atlas = ExtResource("1_wyc4p")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkl4i"]
+atlas = ExtResource("1_wyc4p")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3qal"]
+atlas = ExtResource("1_wyc4p")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8oh70"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idkte")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkl4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3qal")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 15.0
+}]
+
+[node name="HitExplosion" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_8oh70")
+animation = &"Hit"
+autoplay = "Hit"
+frame = 2
+frame_progress = 1.0
+script = ExtResource("2_g4suq")
