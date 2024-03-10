@@ -36,7 +36,8 @@ func shoot():
 	for i in range(4):
 		var bullet = Bullet.instantiate()
 		get_tree().current_scene.add_child(bullet)
-		bullet.global_transform = $Marker2D.global_transform
+		bullet.global_transform = $Sprite2D/Marker2D.global_transform
+	$AnimationPlayer.play("Shot")
 	$ShootSound.play()
 	$GPUParticles2D.emitting = true
 	await get_tree().create_timer(0.25).timeout

@@ -154,6 +154,7 @@ texture = ExtResource("9_s0w08")
 
 [node name="DustParticles" type="CPUParticles2D" parent="."]
 position = Vector2(0, 6)
+emitting = false
 amount = 2
 lifetime = 0.5
 randomness = 1.0

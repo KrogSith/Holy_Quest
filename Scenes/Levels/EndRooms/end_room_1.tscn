@@ -11,6 +11,7 @@
 size = Vector2(8, 30.188)
 
 [node name="EndRoom1" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_mteme")
 
 [node name="TileMap" parent="." instance=ExtResource("1_4t7ok")]
