@@ -14,22 +14,22 @@ var enemy_scenes = {
 }
 
 
-func open_doors():
+func open_doors() -> void:
 	for door in $Doors.get_children():
 		door.open()
 
 
-func start_traps():
+func start_traps() -> void:
 	for trap in $Traps.get_children():
 		trap.start_work()
 
 
-func close_doors():
+func close_doors() -> void:
 	for door in $Doors.get_children():
 		door.close()
 
 
-func stop_traps():
+func stop_traps() -> void:
 	for trap in $Traps.get_children():
 		trap.stop_work()
 
@@ -41,7 +41,7 @@ func random_enemy():
 	return enemy.instantiate()
 		
 		
-func spawn_enemies():
+func spawn_enemies() -> void:
 	for enemy_pos in $EnemyPositions.get_children():
 		var enemy = random_enemy()
 		var __ = enemy.died.connect(self.on_enemy_killed)
@@ -55,7 +55,7 @@ func spawn_enemies():
 		call_deferred("add_child", explosion)
 
 
-func on_enemy_killed():
+func on_enemy_killed() -> void:
 	num_enemies -= 1
 	print('Num of enemies left:', num_enemies)
 	if num_enemies == 0:
@@ -63,7 +63,7 @@ func on_enemy_killed():
 		stop_traps()
 
 
-func _on_player_detector_body_entered(body):
+func _on_player_detector_body_entered(body) -> void:
 	$PlayerDetector.queue_free()
 	close_doors()
 	start_traps()

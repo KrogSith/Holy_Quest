@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnht7pk1ivpqb"]
+[gd_scene load_steps=8 format=3 uid="uid://cnht7pk1ivpqb"]
 
 [ext_resource type="PackedScene" uid="uid://d2uo0ynslvkp6" path="res://Scenes/Tilemaps/tile_map.tscn" id="1_8ci88"]
 [ext_resource type="Script" path="res://Scripts/Rooms/end_room.gd" id="1_t36vf"]
 [ext_resource type="PackedScene" uid="uid://bc884qfo76yo4" path="res://Scenes/Props/door.tscn" id="2_fm4sh"]
 [ext_resource type="PackedScene" uid="uid://dct16ikbii3yc" path="res://Scenes/Props/small_table.tscn" id="4_ydoed"]
 [ext_resource type="PackedScene" uid="uid://e2kct6ibikj2" path="res://Scenes/Props/gramophone.tscn" id="5_lq846"]
+[ext_resource type="PackedScene" uid="uid://vov5m1hkr1lr" path="res://Scenes/Props/stairs.tscn" id="6_h2t6i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_23mge"]
 size = Vector2(107, 8)
@@ -15,7 +16,7 @@ script = ExtResource("1_t36vf")
 metadata/_edit_lock_ = true
 
 [node name="TileMap" parent="." instance=ExtResource("1_8ci88")]
-layer_0/tile_data = PackedInt32Array(196609, 458752, 4, 262145, 196608, 1, 327681, 196608, 1, 393217, 196608, 1, 131074, 458752, 4, 196610, 196608, 1, 262146, 196608, 1, 327682, 196608, 1, 393218, 196608, 1, 65539, 458752, 4, 131075, 196608, 1, 196611, 196608, 1, 262147, 196608, 1, 327683, 196608, 1, 393219, 196608, 1, 65540, 458752, 4, 131076, 65536, 3, 196612, 196608, 1, 262148, 196608, 1, 327684, 196608, 1, 393220, 196608, 1, 65541, 458752, 4, 131077, 196608, 1, 196613, 196608, 1, 262149, 196608, 1, 327685, 196608, 1, 393221, 196608, 1, 458757, 196608, 1, 131078, 458752, 4, 196614, 196608, 1, 262150, 196608, 1, 327686, 196608, 1, 393222, 196608, 1, 458758, 196608, 1, 196615, 458752, 4, 262151, 196608, 1, 327687, 196608, 1, 393223, 196608, 1, 458753, 196608, 1, 458754, 196608, 1, 458755, 196608, 1, 458756, 196608, 1, 524293, 196608, 1, 524294, 196608, 1, 458759, 196608, 1)
+layer_0/tile_data = PackedInt32Array(196609, 458752, 4, 262145, 196608, 1, 327681, 196608, 1, 393217, 196608, 1, 131074, 458752, 4, 196610, 196608, 1, 262146, 196608, 1, 327682, 196608, 1, 393218, 196608, 1, 65539, 458752, 4, 131075, 196608, 1, 196611, 196608, 1, 262147, 196608, 1, 327683, 196608, 1, 393219, 196608, 1, 65540, 458752, 4, 196612, 196608, 1, 262148, 196608, 1, 327684, 196608, 1, 393220, 196608, 1, 65541, 458752, 4, 131077, 196608, 1, 196613, 196608, 1, 262149, 196608, 1, 327685, 196608, 1, 393221, 196608, 1, 458757, 196608, 1, 131078, 458752, 4, 196614, 196608, 1, 262150, 196608, 1, 327686, 196608, 1, 393222, 196608, 1, 458758, 196608, 1, 196615, 458752, 4, 262151, 196608, 1, 327687, 196608, 1, 393223, 196608, 1, 458753, 196608, 1, 458754, 196608, 1, 458755, 196608, 1, 458756, 196608, 1, 524293, 196608, 1, 524294, 196608, 1, 458759, 196608, 1)
 layer_1/tile_data = PackedInt32Array(65539, 196608, 0, 65541, 196608, 0)
 
 [node name="TileMap2" parent="." instance=ExtResource("1_8ci88")]
@@ -47,5 +48,8 @@ position = Vector2(48, 72)
 
 [node name="Gramophone" parent="." instance=ExtResource("5_lq846")]
 position = Vector2(120, 72)
+
+[node name="Stairs" parent="." instance=ExtResource("6_h2t6i")]
+position = Vector2(72, 40)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

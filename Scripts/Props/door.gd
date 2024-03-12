@@ -1,10 +1,10 @@
 extends StaticBody2D
 
 
-func _ready():
+func _ready() -> void:
 	$CollisionShape2D.disabled = true
 
-func start_door():
+func start_door() -> void:
 	$CollisionShape2D.set_deferred("disabled", false)
 	$Sprite2D.visible = false
 	$AnimatedSprite2D.visible = true
@@ -12,7 +12,7 @@ func start_door():
 	$AnimatedSprite2D.frame = 13
 
 
-func open():
+func open() -> void:
 	$AudioStreamPlayer2D.play()
 	$AnimatedSprite2D.play('Open')
 	await get_tree().create_timer(1).timeout
@@ -21,7 +21,7 @@ func open():
 	$CollisionShape2D.disabled = true
 
 
-func close():
+func close() -> void:
 	$AudioStreamPlayer2D.play()
 	$CollisionShape2D.set_deferred("disabled", false)
 	$Sprite2D.visible = false

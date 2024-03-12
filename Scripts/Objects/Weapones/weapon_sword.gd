@@ -8,11 +8,11 @@ var animation_in_progress = false
 @export var equipped = true
 
 
-func _ready():
+func _ready() -> void:
 	$SlashSprite2D.visible = false
 
 
-func _process(delta):
+func _process(delta) -> void:
 	if equipped == false:
 		visible = false
 	anim()
@@ -27,7 +27,7 @@ func _process(delta):
 	############################
 
 
-func anim():
+func anim() -> void:
 	mouse_dir = (get_global_mouse_position()-global_position).normalized()
 	rotation = mouse_dir.angle()
 	if scale.y == 1 and mouse_dir.x < 0:
@@ -36,17 +36,17 @@ func anim():
 		scale.y = 1
 
 
-func actions():
+func actions() -> void:
 	if Input.is_action_just_pressed("attack") and $AnimationPlayer.is_playing() == false:
 		attack()
 
 
-func attack():
+func attack() -> void:
 	$AnimationPlayer.play('Attack')
 	$AudioStreamPlayer2D.play()
 
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(body) -> void:
 	if body.is_in_group('Enemies'):
 		body_inside = true
 		while body_inside == true:
@@ -56,7 +56,7 @@ func _on_area_2d_body_entered(body):
 		
 
 
-func _on_area_2d_body_exited(body):
+func _on_area_2d_body_exited(body) -> void:
 	body_inside = false
 
 

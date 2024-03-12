@@ -5,11 +5,11 @@ var speed = 350
 var damage = 1
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	position += transform.x * speed * delta
 
 
-func _on_body_entered(body):
+func _on_body_entered(body) -> void:
 	if body.name == 'Player':
 		if body.damaged == false:
 			body.get_damage(damage)

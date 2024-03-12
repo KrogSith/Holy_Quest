@@ -17,11 +17,11 @@ const FLOOR_TILE = Vector2i(2, 1)
 #@onready var player: CharacterBody2D = get_tree().current_scene.get_node('Player')
 
 
-func _ready():
+func _ready() -> void:
 	spawn_rooms()
 
 
-func spawn_rooms():
+func spawn_rooms() -> void:
 	var previous_room : Node2D
 	
 	for i in num_levels:

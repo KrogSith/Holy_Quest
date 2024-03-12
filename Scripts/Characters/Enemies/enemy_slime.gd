@@ -25,11 +25,11 @@ var flying = false
 var damage = 1
 
 
-func _ready():
+func _ready() -> void:
 	_on_wander_time_timeout()
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if !dead:
 		state_switch()
 		match current_state:
@@ -58,7 +58,7 @@ func _physics_process(delta):
 		move_and_slide()
 
 
-func anim():
+func anim() -> void:
 	if velocity.x == 0 and velocity.y == 0:
 		$AnimatedSprite2D.play('Idle')
 	else:
@@ -69,7 +69,7 @@ func anim():
 		$AnimatedSprite2D.flip_h = false
 
 
-func state_switch():
+func state_switch() -> void:
 	var player_distance = player.global_position - global_position
 	#if player_distance.length() <= POV:
 	var space_state = get_world_2d().direct_space_state
@@ -84,7 +84,7 @@ func state_switch():
 			pass
 
 
-func makepath():
+func makepath() -> void:
 	nav_agent.target_position = player.global_position
 
 
@@ -96,7 +96,7 @@ func isColliding():
 	return isColliding
 
 
-func get_damage(damage_got):
+func get_damage(damage_got) -> void:
 	add_child(hit_explosion.instantiate())
 	if $AnimatedSprite2D.flip_h == true:
 		$HitExplosion.flip_h = true
@@ -119,7 +119,7 @@ func get_damage(damage_got):
 	damaged = false
 
 
-func death():
+func death() -> void:
 	died.emit()
 	$DeathSound.play()
 	dead = true
@@ -137,7 +137,7 @@ func death():
 	$DeadBody.visible = true
 
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(body) -> void:
 	if body.name == 'Player':
 		body_inside = true
 		while body_inside == true:
@@ -146,22 +146,22 @@ func _on_area_2d_body_entered(body):
 			await get_tree().create_timer(1).timeout
 
 
-func _on_see_timer_timeout():
+func _on_see_timer_timeout() -> void:
 	$Wander_time.start(0.1)
 	current_state = State.Wander
 	$See_timer.stop()
 
 
-func _on_wander_time_timeout():
+func _on_wander_time_timeout() -> void:
 	velocity.x = rng.randf_range(-40.0, 40.0)
 	velocity.y = rng.randf_range(-40.0, 40.0)
 	$Wander_time.wait_time = rng.randf_range(2, 5)
 
 
-func _on_make_path_timer_timeout():
+func _on_make_path_timer_timeout() -> void:
 	makepath()
 	$MakePathTimer.start(0.5)
 
 
-func _on_area_2d_body_exited(body):
+func _on_area_2d_body_exited(body) -> void:
 	body_inside = false

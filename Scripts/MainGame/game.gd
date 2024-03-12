@@ -1,7 +1,7 @@
 extends Node2D
 
 
-func _init():
+func _init() -> void:
 	randomize()
 
 

@@ -5,22 +5,22 @@ const SPAWN_EXPLOSION_SCENE : PackedScene = preload('res://Scenes/Effects/spawn_
 @onready var player: CharacterBody2D = get_tree().current_scene.get_node('Player')
 
 
-func _ready():
+func _ready() -> void:
 	close_doors()
 	player.position = $PlayerSpawn.position
 
 
-func open_doors():
+func open_doors() -> void:
 	for door in $Doors.get_children():
 		door.open()
 
 
-func close_doors():
+func close_doors() -> void:
 	for door in $Doors.get_children():
 		door.start_door()
 
 
-func _on_player_detector_body_entered(body):
+func _on_player_detector_body_entered(body) -> void:
 	$PlayerDetector.queue_free()
 	open_doors()
 

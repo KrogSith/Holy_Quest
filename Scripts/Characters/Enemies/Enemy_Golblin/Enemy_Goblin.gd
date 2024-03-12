@@ -33,7 +33,7 @@ func _ready():
 	$KnifePos/AttackTimer.start(1.5)
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if !dead:
 		if player.dead == true:
 			current_state = State.Wander
@@ -65,7 +65,7 @@ func _physics_process(delta):
 		move_and_slide()
 
 
-func anim():
+func anim() -> void:
 	if velocity.x == 0 and velocity.y == 0:
 		$AnimatedSprite2D.play('Idle')
 		if player.global_position.x < global_position.x:
@@ -80,7 +80,7 @@ func anim():
 		$AnimatedSprite2D.flip_h = false
 
 
-func makepath():
+func makepath() -> void:
 	nav_agent.target_position = player.global_position
 	#current_state = State.Attack
 
@@ -93,7 +93,7 @@ func isColliding():
 	return isColliding
 
 
-func get_damage(damage_got):
+func get_damage(damage_got) -> void:
 	add_child(hit_explosion.instantiate())
 	if $AnimatedSprite2D.flip_h == true:
 		$HitExplosion.flip_h = true
@@ -118,7 +118,7 @@ func get_damage(damage_got):
 	damaged = false
 
 
-func death():
+func death() -> void:
 	died.emit()
 	$DeathSound.play()
 	dead = true
@@ -136,19 +136,19 @@ func death():
 	$DeadBody.visible = true
 
 
-func _on_see_timer_timeout():
+func _on_see_timer_timeout() -> void:
 	$Wander_time.start(0.1)
 	current_state = State.Wander
 	$See_timer.stop()
 
 
-func _on_wander_time_timeout():
+func _on_wander_time_timeout() -> void:
 	velocity.x = rng.randf_range(-100.0, 100.0)
 	velocity.y = rng.randf_range(-100.0, 100.0)
 	$Wander_time.wait_time = rng.randf_range(2, 5)
 
 
-func _on_make_path_timer_timeout():
+func _on_make_path_timer_timeout() -> void:
 	distance_to_player = (player.position - global_position).length()
 	#print(distance_to_player)
 	var space_state = get_world_2d().direct_space_state
@@ -168,11 +168,11 @@ func _on_make_path_timer_timeout():
 	$MakePathTimer.start(0.5)
 	
 
-func makepath_away():
+func makepath_away() -> void:
 	var dir = (global_position - player.position).normalized()
 	nav_agent.target_position = player.global_position + 100*dir
 
-func attack():
+func attack() -> void:
 	if $KnifePos/AttackTimer.time_left == 0:
 		$KnifePos.look_at(player.position)
 		var knife = Knife.instantiate()

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-var db_shotgun = preload("res://Scenes/Objects/Weapons/weapon_db_shotgun.tscn")
-var sword = preload("res://Scenes/Objects/Weapons/weapon_sword.tscn")
+#var db_shotgun = preload("res://Scenes/Objects/Weapons/weapon_db_shotgun.tscn")
+#var sword = preload("res://Scenes/Objects/Weapons/weapon_sword.tscn")
 @onready var healthbar : TextureProgressBar = get_parent().get_node("UI/HealthBar")
 const SPEED = 150.0
 var radius = 5
@@ -10,14 +10,15 @@ var rng = RandomNumberGenerator.new()
 var damaged = false
 var knockback = Vector2.ZERO
 var flying = false
+#healthbar.value
 
-
-func _ready():
-	$Weapon.add_child(sword.instantiate())
+func _ready() -> void:
+	#$Weapon.add_child(sword.instantiate())
 	#$Weapon.add_child(db_shotgun.instantiate())
+	load_data()
 	
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if !dead:
 		movement()
 		anim()
@@ -31,12 +32,16 @@ func _physics_process(delta):
 		get_tree().reload_current_scene()
 
 
-func movement():
+func load_data():
+	healthbar.value = SavedData.hp
+
+
+func movement() -> void:
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = direction * SPEED
 
 
-func anim():
+func anim() -> void:
 	var mouse = get_viewport().get_mouse_position()
 	var res = get_viewport().size
 	
@@ -53,7 +58,7 @@ func anim():
 		$DustParticles.set_emitting(true)
 
 
-func weapon_switch():
+func weapon_switch() -> void:
 	if Input.is_key_pressed(KEY_2):
 		for weapon in $Weapon.get_children():
 				if weapon.name != 'Weapon_DB_Shotgun':
@@ -78,8 +83,9 @@ func weapon_switch():
 			#$Weapon.add_child(sword.instantiate())
 
 
-func get_damage(damage_got):
+func get_damage(damage_got) -> void:
 	healthbar.value -= damage_got*15
+	SavedData.hp = healthbar.value
 	if healthbar.value <= 0:
 		death()
 	else: 
@@ -97,7 +103,7 @@ func get_damage(damage_got):
 		velocity = Vector2.ZERO
 
 
-func death():
+func death() -> void:
 	var mouse = get_viewport().get_mouse_position()
 	var res = get_viewport().size
 	$CollisionShape2D.disabled = true

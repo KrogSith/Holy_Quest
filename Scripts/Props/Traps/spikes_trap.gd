@@ -6,16 +6,16 @@ var body_inside = false
 var damage = 2
 
 
-func _ready():
+func _ready() -> void:
 	$CollisionShape2D.set_deferred("disabled", true)
 
 
-func start_work():
+func start_work() -> void:
 	$AnimatedSprite2D.play()
 	work = true
 
 
-func _process(delta):
+func _process(delta) -> void:
 	if work == true:
 		if $AnimatedSprite2D.frame >= 7 and $AnimatedSprite2D.frame <= 9:
 			$CollisionShape2D.set_deferred('disabled', false)
@@ -25,14 +25,14 @@ func _process(delta):
 		stop_work()
 
 
-func stop_work():
+func stop_work() -> void:
 	work = false
 	if $AnimatedSprite2D.frame >= 0 and $AnimatedSprite2D.frame <= 2 or $AnimatedSprite2D.frame >= 14 and $AnimatedSprite2D.frame <= 16:
 		$AnimatedSprite2D.stop()
 		$CollisionShape2D.set_deferred('disabled', true)
 
 
-func _on_body_entered(body):
+func _on_body_entered(body) -> void:
 	if body.flying == false:
 		body_inside = true
 		while body_inside == true:
@@ -42,5 +42,5 @@ func _on_body_entered(body):
 	else: pass
 
 
-func _on_body_exited(body):
+func _on_body_exited(body) -> void:
 	body_inside = false
