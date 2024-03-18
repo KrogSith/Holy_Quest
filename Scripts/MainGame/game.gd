@@ -3,6 +3,7 @@ extends Node2D
 
 func _init() -> void:
 	randomize()
+	SavedData.hp = 58
 
 
 #func _physics_process(delta):

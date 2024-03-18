@@ -10,6 +10,7 @@ var animation_in_progress = false
 
 func _ready() -> void:
 	$SlashSprite2D.visible = false
+	$Sword/Sprite2D/Area2D/CollisionShape2D.set_deferred("disabled", true)
 
 
 func _process(delta) -> void:
