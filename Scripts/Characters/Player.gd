@@ -29,6 +29,7 @@ func _physics_process(delta) -> void:
 		pass
 		
 	if Input.is_action_just_pressed("game_restart"):
+		SavedData.hp = 58
 		get_tree().reload_current_scene()
 
 
