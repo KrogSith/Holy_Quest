@@ -50,6 +50,7 @@ func shoot() -> void:
 		var bullet = Bullet.instantiate()
 		get_tree().current_scene.add_child(bullet)
 		bullet.global_transform = $Sprite2D/Marker2D.global_transform
+		bullet.dir = (get_global_mouse_position()-global_position).normalized()
 	$AnimationPlayer.play("Shot")
 	$ShootSound.play()
 	$GPUParticles2D.emitting = true

@@ -3,7 +3,9 @@ extends Area2D
 
 var work = false
 var body_inside = false
-var damage = 2
+@export var damage: int = 2
+@export var force: int = 1200
+var dir: Vector2 = Vector2(randf_range(-1.5, 1.5), randf_range(-1.5, 1.5))
 
 
 func _ready() -> void:
@@ -37,7 +39,7 @@ func _on_body_entered(body) -> void:
 		body_inside = true
 		while body_inside == true:
 			if body.damaged == false:
-				body.get_damage(damage)
+				body.get_damage(damage, dir, force)
 			await get_tree().create_timer(1).timeout
 	else: pass
 

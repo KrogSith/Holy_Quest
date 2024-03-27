@@ -57,7 +57,7 @@ func _physics_process(delta) -> void:
 				var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
 				query.exclude = [self]
 				var result = space_state.intersect_ray(query)
-				if result['collider'] == player:
+				if result and result['collider'].is_in_group("Player"):
 					attack()
 				_on_make_path_timer_timeout()
 				#else: current_state = State.Wander
@@ -93,8 +93,10 @@ func isColliding():
 	return isColliding
 
 
-func get_damage(damage_got) -> void:
+func get_damage(damage_got, dir, force) -> void:
 	add_child(hit_explosion.instantiate())
+	velocity = dir * force
+	move_and_slide()
 	if $AnimatedSprite2D.flip_h == true:
 		$HitExplosion.flip_h = true
 	hp -= damage_got
@@ -155,7 +157,7 @@ func _on_make_path_timer_timeout() -> void:
 	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
-	if result['collider'] == player:
+	if result and result['collider'] == player:
 		if distance_to_player > MAX_DISTANCE_TO_PLAYER:
 			makepath()
 			current_state = State.Attack
@@ -166,11 +168,12 @@ func _on_make_path_timer_timeout() -> void:
 	else: 
 		makepath()
 	$MakePathTimer.start(0.5)
-	
+
 
 func makepath_away() -> void:
 	var dir = (global_position - player.position).normalized()
 	nav_agent.target_position = player.global_position + 100*dir
+
 
 func attack() -> void:
 	if $KnifePos/AttackTimer.time_left == 0:
@@ -178,6 +181,7 @@ func attack() -> void:
 		var knife = Knife.instantiate()
 		#print(knife)
 		get_tree().current_scene.add_child(knife)#call_deferred("add_child", knife)
+		knife.dir = (player.global_position-global_position).normalized()
 		#get_parent().call_deferred("add_child", knife)
 		knife.transform = $KnifePos/Marker2D.global_transform
 		$KnifePos/AudioStreamPlayer2D.play()

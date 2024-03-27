@@ -2,10 +2,11 @@ extends Node2D
 
 
 var mouse_dir : Vector2
-var body_inside = false
-var animation_in_progress = false
-@export var damage = 2
-@export var equipped = true
+var body_inside: bool = false
+var animation_in_progress: bool = false
+@export var damage: int = 3
+@export var equipped: bool = true
+@export var knockback_force: int = 1200
 
 
 func _ready() -> void:
@@ -52,7 +53,7 @@ func _on_area_2d_body_entered(body) -> void:
 		body_inside = true
 		while body_inside == true:
 			if body.damaged == false:
-				body.get_damage(damage)
+				body.get_damage(damage, mouse_dir, knockback_force)
 			await get_tree().create_timer(0.5).timeout
 		
 

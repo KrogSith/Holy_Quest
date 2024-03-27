@@ -6,8 +6,7 @@ const POV = 100.0
 
 signal died()
 
-@onready var player: CharacterBody2D = get_tree().current_scene.get_node('Player')#get_parent().get_node("Player")
-#@export var player: CharacterBody2D
+@onready var player: CharacterBody2D = get_tree().current_scene.get_node('Player')
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var hit_explosion = preload('res://Scenes/Effects/hit_explosion.tscn')
 
@@ -16,6 +15,9 @@ enum State {
 	Attack
 }
 
+@export var knockback_force: int = 1200
+@export var damage: int = 1
+
 var current_state = State.Attack
 var rng = RandomNumberGenerator.new()
 var dead = false
@@ -23,7 +25,6 @@ var hp = 2
 var body_inside = false
 var damaged = false
 var flying = true
-var damage = 1
 
 
 func _ready() -> void:
@@ -49,7 +50,7 @@ func _physics_process(delta) -> void:
 					var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
 					query.exclude = [self]
 					var result = space_state.intersect_ray(query)
-					if result['collider'] == player:
+					if result and result['collider'] == player:
 						$MakePathTimer.stop()
 						var dir_to_player = global_position.direction_to(player.global_position)
 						velocity = dir_to_player*SPEED
@@ -71,11 +72,12 @@ func anim() -> void:
 
 
 func _on_area_2d_body_entered(body) -> void:
-	if body.name == 'Player':
+	if body.is_in_group("Player"):
 		body_inside = true
 		while body_inside == true:
 			if body.damaged == false:
-				body.get_damage(damage)
+				var dir = velocity.normalized()
+				body.get_damage(damage, dir, knockback_force)
 			await get_tree().create_timer(1).timeout
 
 
@@ -89,7 +91,7 @@ func state_switch() -> void:
 	var result = space_state.intersect_ray(query)
 	#print(result)
 	if player.dead == false:
-		if result['collider'] == player:
+		if result and result['collider'].is_in_group("Player"):
 			$See_timer.start()
 			current_state = State.Attack
 		else:
@@ -108,8 +110,10 @@ func isColliding():
 	return isColliding
 
 
-func get_damage(damage_got) -> void:
+func get_damage(damage_got, dir, force) -> void:
 	add_child(hit_explosion.instantiate())
+	velocity = dir * force
+	move_and_slide()
 	if $AnimatedSprite2D.flip_h == true:
 		$HitExplosion.flip_h = true
 	hp -= damage_got
