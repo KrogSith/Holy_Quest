@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmgv1ncdu72uy"
-path="res://.godot/imported/weapon_sword_1.png-d6c00e666fd3307551cca510948abdef.ctex"
+uid="uid://bj03uqalykbsc"
+path="res://.godot/imported/potion_red.png-aff3dceebcd21f2668992bc47f3795e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Items/Weapons/weapon_sword_1.png"
-dest_files=["res://.godot/imported/weapon_sword_1.png-d6c00e666fd3307551cca510948abdef.ctex"]
+source_file="res://Textures/Items/Potions/potion_red.png"
+dest_files=["res://.godot/imported/potion_red.png-aff3dceebcd21f2668992bc47f3795e0.ctex"]
 
 [params]
 

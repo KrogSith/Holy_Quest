@@ -6,10 +6,9 @@ const SPEED = 130.0#50.0
 const POV = 60.0
 
 @onready var player: CharacterBody2D = get_tree().current_scene.get_node('Player')#get_parent().get_node("Player")
-@onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
-@export var Knife : PackedScene = preload('res://Scenes/Characters/Enemies/Enemy_Goblin/goblin_knife.tscn')
-@onready var hit_explosion = preload('res://Scenes/Effects/hit_explosion.tscn')
-#var knife : PackedScene = preload('res://Scenes/Characters/Enemies/Enemy_Goblin/goblin_knife.tscn')
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D as NavigationAgent2D
+@export var Knife: PackedScene = preload('res://Scenes/Characters/Enemies/Enemy_Goblin/goblin_knife.tscn')
+@onready var hit_explosion: PackedScene = preload('res://Scenes/Effects/hit_explosion.tscn')
 
 signal died
 
@@ -37,7 +36,6 @@ func _physics_process(delta) -> void:
 	if !dead:
 		if player.dead == true:
 			current_state = State.Wander
-		#state_switch()
 		match current_state:
 			State.Wander:
 				$See_timer.stop()
@@ -60,7 +58,6 @@ func _physics_process(delta) -> void:
 				if result and result['collider'].is_in_group("Player"):
 					attack()
 				_on_make_path_timer_timeout()
-				#else: current_state = State.Wander
 		anim()
 		move_and_slide()
 
@@ -82,7 +79,6 @@ func anim() -> void:
 
 func makepath() -> void:
 	nav_agent.target_position = player.global_position
-	#current_state = State.Attack
 
 
 func isColliding():
@@ -126,7 +122,6 @@ func death() -> void:
 	dead = true
 	$AnimatedSprite2D.queue_free()
 	$CollisionShape2D.queue_free()
-	#$Area2D.queue_free()
 	$NavigationAgent2D.queue_free()
 	$Wander_time.queue_free()
 	$See_timer.queue_free()
@@ -152,7 +147,6 @@ func _on_wander_time_timeout() -> void:
 
 func _on_make_path_timer_timeout() -> void:
 	distance_to_player = (player.position - global_position).length()
-	#print(distance_to_player)
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
 	query.exclude = [self]

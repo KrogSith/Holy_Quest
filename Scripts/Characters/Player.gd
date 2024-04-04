@@ -83,7 +83,7 @@ func weapon_switch() -> void:
 					#weapon.equipped = false
 				#else:
 					#weapon.equipped = true
-	if Input.is_key_pressed(KEY_1) and curr_weapon != weapones[0]:
+	if Input.is_key_pressed(KEY_1) and len(weapones) >= 1:
 		for weapon in $Weapon.get_children():
 			if weapon.name != weapones[0]:
 					weapon.equipped = false
@@ -93,7 +93,7 @@ func weapon_switch() -> void:
 		SavedData.curr_weapon = curr_weapon
 		#print(SavedData.curr_weapon)
 	
-	elif Input.is_key_pressed(KEY_2) and curr_weapon != weapones[1]:
+	elif Input.is_key_pressed(KEY_2) and len(weapones) >= 2:
 		for weapon in $Weapon.get_children():
 			if weapon.name != weapones[1]:
 				weapon.equipped = false
@@ -101,7 +101,7 @@ func weapon_switch() -> void:
 				weapon.equipped = true
 		curr_weapon = weapones[1]
 		SavedData.curr_weapon = curr_weapon
-		print(SavedData.curr_weapon)
+		#print(SavedData.curr_weapon)
 
 
 func get_damage(damage_got, dir, force) -> void:
@@ -136,15 +136,17 @@ func death() -> void:
 	$CollisionShape2D.queue_free()
 	$AnimatedSprite2D.queue_free()
 	$DustParticles.queue_free()
-	#if $AnimatedSprite2D.flip_h == true:
-	#	$Sprite2D.flip_h = true
-	#if scale.x == -1:
-	#	$Sprite2D.flip_h = true
-	#else:
-	#	pass
+	if $AnimatedSprite2D.flip_h == true:
+		$Sprite2D.flip_h = true
+	if scale.x == -1:
+		$Sprite2D.flip_h = true
+	else:
+		pass
 	$Sprite2D.visible = true
 
 
+#func next_level():
+#	SavedData.weapones = weapones
 
 
 

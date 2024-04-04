@@ -1,7 +1,6 @@
 extends Node2D
 
 
-#@onready var num_enemies = $EnemyPositions.get_child_count()
 var num_enemies = 0
 
 var rng = RandomNumberGenerator.new()
@@ -12,6 +11,14 @@ var enemy_scenes = {
 	'enemy_slime': preload('res://Scenes/Characters/Enemies/enemy_slime.tscn'),
 	'enemy_goblin': preload('res://Scenes/Characters/Enemies/Enemy_Goblin/enemy_goblin.tscn')
 }
+var weapon_scenes = {
+	'weapon_sword': preload('res://Scenes/Objects/Weapons/collectable_sword.tscn'),
+	'weapon_db_shotgun': preload('res://Scenes/Objects/Weapons/collectable_db_shotgun.tscn')
+	}
+
+
+func _ready():
+	spawn_weapones()
 
 
 func open_doors() -> void:
@@ -39,8 +46,15 @@ func random_enemy():
 	var random_enemy = enemy_scenes.keys()[randi() % size]
 	var enemy = enemy_scenes[random_enemy]
 	return enemy.instantiate()
-		
-		
+
+
+func random_weapon():
+	var size = weapon_scenes.size()
+	var random_weapon = weapon_scenes.keys()[randi() % size]
+	var weapon = weapon_scenes[random_weapon]
+	return weapon.instantiate()
+
+
 func spawn_enemies() -> void:
 	for enemy_pos in $EnemyPositions.get_children():
 		var enemy = random_enemy()
@@ -55,9 +69,17 @@ func spawn_enemies() -> void:
 		call_deferred("add_child", explosion)
 
 
+func spawn_weapones() -> void:
+	for weapon_pos in $WeaponPositions.get_children():
+		var weapon = random_weapon()
+		weapon.position = weapon_pos.position
+		call_deferred("add_child", weapon)
+		#print(num_enemies)
+
+
 func on_enemy_killed() -> void:
 	num_enemies -= 1
-	print('Num of enemies left:', num_enemies)
+	#print('Num of enemies left:', num_enemies)
 	if num_enemies == 0:
 		open_doors()
 		stop_traps()

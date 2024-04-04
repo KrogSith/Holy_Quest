@@ -114,7 +114,7 @@ height = 12.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" groups=["Damageable", "Player"]]
 y_sort_enabled = true
 collision_layer = 5
 collision_mask = 5
@@ -151,6 +151,7 @@ texture = ExtResource("9_s0w08")
 [node name="Weapon_Sword" parent="Weapon" instance=ExtResource("8_1jth2")]
 
 [node name="DustParticles" type="CPUParticles2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, 6)
 emitting = false
 amount = 2

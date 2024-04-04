@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://csqvp0ujlim8x"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/Weapones/collectable_db_shotgun.gd" id="1_6yxhv"]
+[ext_resource type="Texture2D" uid="uid://nc7ltsbxv580" path="res://Textures/Weapones/DBShotgun.png" id="1_rlr4i"]
+
+[sub_resource type="Animation" id="Animation_o0lui"]
+resource_name = "Squeeze"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.7, 0.7), Vector2(0.7, 0.7), Vector2(1, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6adll"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.7, 0.7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_konjg"]
+_data = {
+"RESET": SubResource("Animation_6adll"),
+"Squeeze": SubResource("Animation_o0lui")
+}
+
+[node name="Collectable_DB_Shotgun" type="Area2D"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_6yxhv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rlr4i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_konjg")
+}

@@ -1,5 +1,6 @@
 extends Node
 
-var hp = 58
-var curr_weapon = "Weapon_Sword"
+var hp: int = 58
+var curr_weapon: String = "Weapon_Sword"
+var weapones: Array = ["Weapon_Sword", "Weapon_DB_Shotgun"]
 

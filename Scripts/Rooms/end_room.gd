@@ -10,7 +10,8 @@ func close_doors() -> void:
 
 
 func _on_player_detector_body_entered(body) -> void:
-	$PlayerDetector.queue_free()
-	close_doors()
+	if body.is_in_group("Player"):
+		$PlayerDetector.queue_free()
+		close_doors()
 
 

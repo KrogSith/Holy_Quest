@@ -35,12 +35,13 @@ func stop_work() -> void:
 
 
 func _on_body_entered(body) -> void:
-	if body.flying == false:
-		body_inside = true
-		while body_inside == true:
-			if body.damaged == false:
-				body.get_damage(damage, dir, force)
-			await get_tree().create_timer(1).timeout
+	if body.is_in_group("Damageable"):
+		if body.flying == false:
+			body_inside = true
+			while body_inside == true:
+				if body.damaged == false:
+					body.get_damage(damage, dir, force)
+				await get_tree().create_timer(1).timeout
 	else: pass
 
 
